@@ -2,7 +2,6 @@
 TABLE user {
     id SERIAL [pk]
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-    username VARCHAR(255) [NOT NULL]
     first_name VARCHAR(255) [NOT NULL]
     last_name VARCHAR(255) [NOT NULL]
     state VARCHAR(255) [NOT NULL]
@@ -80,4 +79,3 @@ TABLE prompt
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP 
     detail TEXT
 }
-
