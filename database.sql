@@ -43,12 +43,16 @@ CREATE TABLE user_event (
 
 CREATE TABLE resource (
     id SERIAL PRIMARY KEY,
+    description TEXT,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     access_level VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE question (
     id SERIAL PRIMARY KEY,
+    type VARCHAR(255),
+    detail TEXT,
+    hidden BOOLEAN,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 

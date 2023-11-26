@@ -9,10 +9,12 @@ function UserPage() {
   const user = useSelector((store) => store.user);
   const family = useSelector((store) => store.family);
   const event = useSelector((store) => store.event);
+  const resource = useSelector((store) => store.resource);
 
   useEffect(() => {
     dispatch({ type: "FETCH_FAMILY" });
     dispatch({ type: "FETCH_EVENT" });
+    dispatch({ type: "FETCH_RESOURCE" });
   }, []);
 
   return (
@@ -21,7 +23,7 @@ function UserPage() {
       <p>Your ID is: {user.id}</p>
       <p>Family: {JSON.stringify(family)}</p>
       <p>Event: {JSON.stringify(event)}</p>
-
+      <p>Resource: {JSON.stringify(resource)}</p>
       <LogOutButton className="btn" />
     </div>
   );
