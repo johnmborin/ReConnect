@@ -8,9 +8,11 @@ function UserPage() {
 
   const user = useSelector((store) => store.user);
   const family = useSelector((store) => store.family);
+  const event = useSelector((store) => store.event);
 
   useEffect(() => {
     dispatch({ type: "FETCH_FAMILY" });
+    dispatch({ type: "FETCH_EVENT" });
   }, []);
 
   return (
@@ -18,6 +20,7 @@ function UserPage() {
       <h2>Welcome, {user.username}!</h2>
       <p>Your ID is: {user.id}</p>
       <p>Family: {JSON.stringify(family)}</p>
+      <p>Event: {JSON.stringify(event)}</p>
 
       <LogOutButton className="btn" />
     </div>
