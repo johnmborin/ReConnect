@@ -7,7 +7,7 @@ CREATE TABLE "user" (
     city VARCHAR(255) NOT NULL,
     date_of_birth DATE NOT NULL,
     password VARCHAR(1000) NOT NULL,
-    email VARCHAR(255) NOT NULL,
+    username VARCHAR(255) NOT NULL,
     access_level VARCHAR(255) NOT NULL
 );
 
@@ -76,3 +76,36 @@ CREATE TABLE journal (
     date DATE NOT NULL,
     detail TEXT
 );
+
+-- please write an insert statement for each table to add some data to it
+-- Path: insert.sql
+INSERT INTO "user" (first_name, last_name, state, city, date_of_birth, password, username, access_level)
+VALUES ('John', 'Doe', 'CA', 'San Francisco', '1990-01-01', 'password', 'jerry@gmail.com', 'admin');
+
+INSERT INTO family (id)
+VALUES (1);
+
+INSERT INTO user_family (user_id, family_id)
+VALUES (1, 1);
+
+INSERT INTO event (date, detail, family_id, time, type)
+VALUES ('2020-01-01', 'New Years', 1, '2020-01-01 00:00:00', 'holiday');
+
+INSERT INTO user_event (event_id, user_id, attending)
+VALUES (1, 1, true);
+
+INSERT INTO resource (access_level)
+VALUES ('parent');
+
+INSERT INTO question (id)
+VALUES (1);
+
+INSERT INTO response (user_id, date, question_id, response, score)
+VALUES (1, '2020-01-01', 1, 'response', 1);
+
+INSERT INTO prompt (detail)
+VALUES ('detail');
+
+INSERT INTO journal (prompt_id, user_id, date, detail)
+VALUES (1, 1, '2020-01-01', 'detail');
+

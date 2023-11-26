@@ -1,14 +1,24 @@
-import React from 'react';
-import LogOutButton from '../LogOutButton/LogOutButton';
-import {useSelector} from 'react-redux';
+import React, { useEffect } from "react";
+import LogOutButton from "../LogOutButton/LogOutButton";
+import { useSelector, useDispatch } from "react-redux";
 
 function UserPage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
+  const dispatch = useDispatch();
+
   const user = useSelector((store) => store.user);
+  const family = useSelector((store) => store.family);
+
+  useEffect(() => {
+    dispatch({ type: "FETCH_FAMILY" });
+  }, []);
+
   return (
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
       <p>Your ID is: {user.id}</p>
+      <p>Family: {JSON.stringify(family)}</p>
+
       <LogOutButton className="btn" />
     </div>
   );
