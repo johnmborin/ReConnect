@@ -1,7 +1,14 @@
-import { all } from 'redux-saga/effects';
-import loginSaga from './login.saga';
-import registrationSaga from './registration.saga';
-import userSaga from './user.saga';
+import { all } from "redux-saga/effects";
+import loginSaga from "./login.saga";
+import registrationSaga from "./registration.saga";
+import userSaga from "./user.saga";
+import familySaga from "./family.saga";
+import eventSaga from "./event.saga";
+import resourceSaga from "./resource.saga";
+import questionSaga from "./question.saga";
+import responseSaga from "./response.saga";
+import promptSaga from "./prompt.saga";
+import journalSaga from "./journal.saga";
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -15,5 +22,12 @@ export default function* rootSaga() {
     loginSaga(), // login saga is now registered
     registrationSaga(),
     userSaga(),
+    familySaga(),
+    eventSaga(),
+    resourceSaga(),
+    questionSaga(),
+    responseSaga(),
+    promptSaga(),
+    journalSaga(),
   ]);
 }
