@@ -4,6 +4,8 @@ import user from "./user.reducer";
 import family from "./family.reducer";
 import event from "./event.reducer";
 import resource from "./resource.reducer";
+import question from "./question.reducer";
+import response from "./response.reducer";
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -17,6 +19,8 @@ const rootReducer = combineReducers({
   family,
   event,
   resource,
+  question,
+  response,
 });
 
 export default rootReducer;

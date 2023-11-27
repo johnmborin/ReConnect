@@ -3,7 +3,7 @@ const pool = require("../modules/pool");
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  console.log("in event router GET");
+  // console.log("in event router GET");
   const queryText = `
       SELECT user_event.*, event.* 
       FROM user_event 
@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
   pool
     .query(queryText)
     .then((result) => {
-      console.log(result.rows);
+      // console.log(result.rows);
       res.send(result.rows);
     })
     .catch((error) => {

@@ -12,6 +12,8 @@ const userRouter = require("./routes/user.router");
 const familyRouter = require("./routes/family.router");
 const eventRouter = require("./routes/event.router");
 const resourceRouter = require("./routes/resource.router");
+const questionRouter = require("./routes/question.router");
+const responseRouter = require("./routes/response.router");
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -29,6 +31,8 @@ app.use("/api/user", userRouter);
 app.use("/api/family", familyRouter);
 app.use("/api/event", eventRouter);
 app.use("/api/resource", resourceRouter);
+app.use("/api/question", questionRouter);
+app.use("/api/response", responseRouter);
 
 // Serve static files
 app.use(express.static("build"));

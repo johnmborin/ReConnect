@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get("/", (req, res) => {
   // console.log("in resource router GET");
-  const queryText = `SELECT * FROM "resource" ORDER BY "id" ASC;`;
+  const queryText = `SELECT * FROM "response" ORDER BY "id" ASC;`;
 
   pool
     .query(queryText)
@@ -13,7 +13,7 @@ router.get("/", (req, res) => {
       res.send(result.rows);
     })
     .catch((error) => {
-      console.log("error in resource router GET", error);
+      console.log("error in response router GET", error);
       res.sendStatus(500);
     });
 });

@@ -10,11 +10,15 @@ function UserPage() {
   const family = useSelector((store) => store.family);
   const event = useSelector((store) => store.event);
   const resource = useSelector((store) => store.resource);
+  const question = useSelector((store) => store.question);
+  const response = useSelector((store) => store.response);
 
   useEffect(() => {
     dispatch({ type: "FETCH_FAMILY" });
     dispatch({ type: "FETCH_EVENT" });
     dispatch({ type: "FETCH_RESOURCE" });
+    dispatch({ type: "FETCH_QUESTION" });
+    dispatch({ type: "FETCH_RESPONSE" });
   }, []);
 
   return (
@@ -24,6 +28,8 @@ function UserPage() {
       <p>Family: {JSON.stringify(family)}</p>
       <p>Event: {JSON.stringify(event)}</p>
       <p>Resource: {JSON.stringify(resource)}</p>
+      <p>Question: {JSON.stringify(question)}</p>
+      <p>Response: {JSON.stringify(response)}</p>
       <LogOutButton className="btn" />
     </div>
   );
