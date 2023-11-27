@@ -15,6 +15,7 @@ const resourceRouter = require("./routes/resource.router");
 const questionRouter = require("./routes/question.router");
 const responseRouter = require("./routes/response.router");
 const promptRouter = require("./routes/prompt.router");
+const journalRouter = require("./routes/journal.router");
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -35,6 +36,7 @@ app.use("/api/resource", resourceRouter);
 app.use("/api/question", questionRouter);
 app.use("/api/response", responseRouter);
 app.use("/api/prompt", promptRouter);
+app.use("/api/journal", journalRouter);
 
 // Serve static files
 app.use(express.static("build"));

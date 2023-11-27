@@ -13,6 +13,7 @@ function UserPage() {
   const question = useSelector((store) => store.question);
   const response = useSelector((store) => store.response);
   const prompt = useSelector((store) => store.prompt);
+  const journal = useSelector((store) => store.journal);
 
   useEffect(() => {
     dispatch({ type: "FETCH_FAMILY" });
@@ -21,6 +22,7 @@ function UserPage() {
     dispatch({ type: "FETCH_QUESTION" });
     dispatch({ type: "FETCH_RESPONSE" });
     dispatch({ type: "FETCH_PROMPT" });
+    dispatch({ type: "FETCH_JOURNAL" });
   }, []);
 
   return (
@@ -33,6 +35,7 @@ function UserPage() {
       <p>Question: {JSON.stringify(question)}</p>
       <p>Response: {JSON.stringify(response)}</p>
       <p>Prompt: {JSON.stringify(prompt)}</p>
+      <p>Journal: {JSON.stringify(journal)}</p>
       <LogOutButton className="btn" />
     </div>
   );

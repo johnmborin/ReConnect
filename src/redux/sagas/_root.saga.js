@@ -8,6 +8,7 @@ import resourceSaga from "./resource.saga";
 import questionSaga from "./question.saga";
 import responseSaga from "./response.saga";
 import promptSaga from "./prompt.saga";
+import journalSaga from "./journal.saga";
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -27,5 +28,6 @@ export default function* rootSaga() {
     questionSaga(),
     responseSaga(),
     promptSaga(),
+    journalSaga(),
   ]);
 }
