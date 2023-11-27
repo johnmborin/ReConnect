@@ -6,6 +6,7 @@ import event from "./event.reducer";
 import resource from "./resource.reducer";
 import question from "./question.reducer";
 import response from "./response.reducer";
+import prompt from "./prompt.reducer";
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   resource,
   question,
   response,
+  prompt,
 });
 
 export default rootReducer;
