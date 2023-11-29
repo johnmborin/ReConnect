@@ -1,9 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import "./CalendarView.css";
 
 const CalendarView = () => {
-  return (
-    <div>CalendarView</div>
-  )
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch({ type: "FETCH_EVENT" });
+    }, []); 
+
+    const userEvents = useSelector((store) => store.event);
+    
+    return (
+        <div>
+            CalendarView
+            {JSON.stringify(userEvents)}
+        </div>
+    );
 }
 
-export default CalendarView
+export default CalendarView;
