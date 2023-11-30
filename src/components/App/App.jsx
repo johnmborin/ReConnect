@@ -20,8 +20,10 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import ResourcesView from '../ResourcesView/ResourcesView';
+import CalendarView from '../CalendarView/CalendarView';
 
 import './App.css';
+
 
 function App() {
   const dispatch = useDispatch();
@@ -67,6 +69,14 @@ function App() {
             path="/info"
           >
             <InfoPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows CalendarView else shows LoginPage
+            exact
+            path="/calendar"
+          >
+            <CalendarView />
           </ProtectedRoute>
 
           <Route
