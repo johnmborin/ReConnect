@@ -1,54 +1,47 @@
 import * as React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-// material UI
 import dayjs from 'dayjs';
-import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
+
+// material UI
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
+import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 
-export default function DateCalendarValue() {
+export default function StaticDatePickerWithEvents() {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch({ type: "FETCH_EVENT" });
+    dispatch({ type: 'FETCH_EVENT' });
   }, [dispatch]);
 
   const events = useSelector((store) => store.event);
+  const [selectedDate, setSelectedDate] = React.useState(dayjs());
+  const [selectedEvents, setSelectedEvents] = React.useState([]);
 
-  const [value, setValue] = React.useState(dayjs());
+  const handleDateChange = (newValue) => {
+    setSelectedDate(newValue);
 
-  // checks to see if any events today
-  const renderDay = (date, _value, DayComponentProps) => {
-    const event = events.find(
-        (event) => dayjs(event.date).isSame(dayjs(date), 'day')
+    // Filter events for the selected date
+    const eventsForDate = events.filter(
+      (event) => dayjs(event.date).isSame(dayjs(newValue), 'day')
     );
 
-    return (
-        <div>
-            {DayComponentProps.day}
-            {event && (
-                <div style={{ fontSize: '0.8em' }}>
-                    {event.detail} ({event.time})
-                </div>
-            )}
-        </div>
-    );
-};
-
+    setSelectedEvents(eventsForDate);
+  };
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DemoContainer components={['DateCalendar', 'DateCalendar']}>
-        <DemoItem label="Controlled calendar with events">
-          <DateCalendar
-            value={value}
-            onChange={(newValue) => setValue(newValue)}
-            renderDay={renderDay}
-          />
-        </DemoItem>
-      </DemoContainer>
+      <StaticDatePicker
+        value={selectedDate}
+        onChange={handleDateChange}
+      />
+      {/* Display events for the selected date */}
+      {selectedEvents.map((event, index) => (
+        <div key={index}>
+          {event.detail} ({event.time})
+        </div>
+      ))}
     </LocalizationProvider>
   );
 }
