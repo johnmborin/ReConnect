@@ -9,6 +9,7 @@ CREATE TABLE "user" (
   state VARCHAR(255),
   email VARCHAR(255),
   is_parent BOOLEAN DEFAULT true
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE family (
