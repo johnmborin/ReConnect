@@ -1,14 +1,15 @@
 CREATE TABLE "user" (
-    id SERIAL PRIMARY KEY,
-    -- created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    -- first_name VARCHAR(255) NOT NULL,
-    -- last_name VARCHAR(255) NOT NULL,
-    -- state VARCHAR(255) NOT NULL,
-    -- city VARCHAR(255) NOT NULL,
-    -- date_of_birth DATE NOT NULL,
-    password VARCHAR(1000) NOT NULL,
-    username VARCHAR(255) NOT NULL
-    -- access_level VARCHAR(255) NOT NULL
+  id SERIAL PRIMARY KEY,
+  username VARCHAR(255) UNIQUE NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  first_name VARCHAR(255),
+  last_name VARCHAR(255),
+  date_of_birth DATE,
+  city VARCHAR(255),
+  state VARCHAR(255),
+  email VARCHAR(255),
+  is_parent BOOLEAN DEFAULT true
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE family (
