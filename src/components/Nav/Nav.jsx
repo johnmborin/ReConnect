@@ -36,6 +36,10 @@ function Nav() {
               Calendar
             </Link>
 
+            <Link className="navLink" to="/journal">
+              Journal
+            </Link>
+
             <LogOutButton className="navLink" />
           </>
         )}
