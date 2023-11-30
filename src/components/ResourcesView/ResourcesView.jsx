@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector , useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import './ResourcesView.css'
 
@@ -17,12 +17,9 @@ function ResourcesView() {
             <hr className='line-under-resources'></hr>
             {
                 resources.map(resource => (
-                    <div class="row">
-                        
-                        <div >
-                            <a className='link' href={resource.url} target="_blank">{resource.description}</a>
-                            <hr className='line-under-resources'></hr>
-                        </div>
+                    <div>
+                        <a className='link' href={resource.url} target="_blank">{resource.description}</a>
+                        <hr className='line-under-resources'></hr>
                     </div>
                 ))
             }
