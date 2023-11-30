@@ -79,6 +79,15 @@ function App() {
             <CalendarView />
           </ProtectedRoute>
 
+
+          <ProtectedRoute
+            // logged in shows CalendarView else shows LoginPage
+            exact
+            path="/calendar"
+          >
+            <CalendarView />
+          </ProtectedRoute>
+
           <Route
             exact
             path="/login"
