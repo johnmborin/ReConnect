@@ -44,101 +44,93 @@ function RegisterForm() {
           {errors.registrationMessage}
         </h3>
       )}
-            <div>
-        <label htmlFor="firstName">
-          First Name:
-          <input
-            type="text"
-            name="firstName"
-            value={firstName}
-            required
-            onChange={(event) => setFirstName(event.target.value)}
-          />
-        </label>
+      <div>
+        <TextField
+          label="First Name"
+          variant="outlined"
+          type="text"
+          name="firstName"
+          value={firstName}
+          required
+          onChange={(event) => setFirstName(event.target.value)}
+        />
       </div>
       <div>
-        <label htmlFor="lastName">
-          Last Name:
-          <input
-            type="text"
-            name="lastName"
-            value={lastName}
-            required
-            onChange={(event) => setLastName(event.target.value)}
-          />
-        </label>
+        <TextField
+          label="Last Name"
+          variant="outlined"
+          type="text"
+          name="lastName"
+          value={lastName}
+          required
+          onChange={(event) => setLastName(event.target.value)}
+        />
       </div>
       <div>
-        <label htmlFor="dateOfBirth">
-          Date of Birth:
-          <input
-            type="text"
-            name="dateOfBirth"
-            value={dateOfBirth}
-            required
-            onChange={(event) => setDateOfBirth(event.target.value)}
-          />
-        </label>
+        <TextField
+          label="Date of Birth"
+          variant="outlined"
+          type="text"
+          name="dateOfBirth"
+          value={dateOfBirth}
+          required
+          onChange={(event) => setDateOfBirth(event.target.value)}
+        />
       </div>
       <div>
-        <label htmlFor="city">
-          City:
-          <input
-            type="text"
-            name="city"
-            value={city}
-            required
-            onChange={(event) => setCity(event.target.value)}
-          />
-        </label>
+        <TextField
+          label="City"
+          variant="outlined"
+          type="text"
+          name="city"
+          value={city}
+          required
+          onChange={(event) => setCity(event.target.value)}
+        />
       </div>
       <div>
-        <label htmlFor="state">
-          State:
-          <input
-            type="text"
-            name="state"
-            value={state}
-            required
-            onChange={(event) => setState(event.target.value)}
-          />
-        </label>
+        <TextField
+          label="State"
+          variant="outlined"
+          type="text"
+          name="state"
+          value={state}
+          required
+          onChange={(event) => setState(event.target.value)}
+        />
       </div>
       <div>
-        <label htmlFor="email">
-          Email:
-          <input
-            type="text"
-            name="email"
-            value={email}
-            required
-            onChange={(event) => setEmail(event.target.value)}
-          />
-        </label>
+        <TextField
+          label="Email"
+          variant="outlined"
+          type="text"
+          name="email"
+          value={email}
+          required
+          onChange={(event) => setEmail(event.target.value)}
+        />
       </div>
       <div>
-        <label htmlFor="username">
-          Username:
-          <input
-            type="text"
-            name="username"
-            value={username}
-            required
-            onChange={(event) => setUsername(event.target.value)}
-          />
-        </label>
+        <TextField
+          label="Username"
+          variant="outlined"
+          type="text"
+          name="username"
+          value={username}
+          required
+          onChange={(event) => setUsername(event.target.value)}
+        />
       </div>
       <div>
-        <label htmlFor="password">
-          Password:
-          <input
-            type="password"
-            name="password"
-            value={password}
-            required
-            onChange={(event) => setPassword(event.target.value)}
-          />
-        </label>
+        <TextField
+          label="Password"
+          variant="outlined"
+          type="text"
+          name="password"
+          value={password}
+          required
+          onChange={(event) => setPassword(event.target.value)}
+        />
       </div>
       <div>
         <label htmlFor="role">
