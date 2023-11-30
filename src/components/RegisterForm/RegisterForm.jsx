@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 function RegisterForm() {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+  const [dateOfBirth, setDateOfBirth] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const errors = useSelector((store) => store.errors);
@@ -13,6 +18,11 @@ function RegisterForm() {
     dispatch({
       type: 'REGISTER',
       payload: {
+        firstName: firstName,
+        lastName: lastName,
+        city: city,
+        state: state,
+        dateOfBirth: dateOfBirth,
         username: username,
         password: password,
       },
@@ -27,6 +37,66 @@ function RegisterForm() {
           {errors.registrationMessage}
         </h3>
       )}
+            <div>
+        <label htmlFor="firstName">
+          First Name:
+          <input
+            type="text"
+            name="firstName"
+            value={firstName}
+            required
+            onChange={(event) => setFirstName(event.target.value)}
+          />
+        </label>
+      </div>
+      <div>
+        <label htmlFor="lastName">
+          Last Name:
+          <input
+            type="text"
+            name="lastName"
+            value={lastName}
+            required
+            onChange={(event) => setLastName(event.target.value)}
+          />
+        </label>
+      </div>
+      <div>
+        <label htmlFor="city">
+          City:
+          <input
+            type="text"
+            name="city"
+            value={city}
+            required
+            onChange={(event) => setCity(event.target.value)}
+          />
+        </label>
+      </div>
+      <div>
+        <label htmlFor="state">
+          State:
+          <input
+            type="text"
+            name="state"
+            value={state}
+            required
+            onChange={(event) => setState(event.target.value)}
+          />
+        </label>
+      </div>
+      <div>
+        <label htmlFor="dateOfBirth">
+          Date of Birth:
+          <input
+            type="text"
+            name="dateOfBirth"
+            value={dateOfBirth}
+            required
+            onChange={(event) => setDateOfBirth(event.target.value)}
+          />
+        </label>
+      </div>
       <div>
         <label htmlFor="username">
           Username:
