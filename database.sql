@@ -43,7 +43,8 @@ CREATE TABLE user_event (
 
 CREATE TABLE resource (
     id SERIAL PRIMARY KEY,
-    description TEXT,
+    description VARCHAR(255),
+    url TEXT,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     access_level VARCHAR(255) NOT NULL
 );
