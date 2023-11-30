@@ -15,21 +15,21 @@ function ResourcesView() {
                 <div>
                     <div>
                         {/* <p>text</p> */}
-                        <a className='link' href="https://kids.kiddle.co/Divorce">
+                        <a className='link' href="https://kids.kiddle.co/Divorce" target="_blank">
                             Divorce Facts For Kids
                         </a>
                         <hr className='line-under-resources'></hr>
                     </div>
                     <div>
                         {/* <p>text</p> */}
-                        <a className='link' href="https://themarriagefoundation.org/effects-of-divorce-on-children/?gclid=CjwKCAiAmZGrBhAnEiwAo9qHifncaYm7sHzJiw8RR-JnEcioNxx7gO70nvG725g3pDXNv1nPMgDrDxoCQI0QAvD_BwE">
+                        <a className='link' href="https://themarriagefoundation.org/effects-of-divorce-on-children/?gclid=CjwKCAiAmZGrBhAnEiwAo9qHifncaYm7sHzJiw8RR-JnEcioNxx7gO70nvG725g3pDXNv1nPMgDrDxoCQI0QAvD_BwE" target="_blank">
                             Effects of Divorce on Children
                         </a>
                         <hr className='line-under-resources'></hr>
                     </div>
                     <div>
                         {/* <p>text</p> */}
-                        <a className='link' href="https://themarriagefoundation.org/effects-of-divorce-on-children/?gclid=CjwKCAiAmZGrBhAnEiwAo9qHifncaYm7sHzJiw8RR-JnEcioNxx7gO70nvG725g3pDXNv1nPMgDrDxoCQI0QAvD_BwE">
+                        <a className='link' href="https://themarriagefoundation.org/effects-of-divorce-on-children/?gclid=CjwKCAiAmZGrBhAnEiwAo9qHifncaYm7sHzJiw8RR-JnEcioNxx7gO70nvG725g3pDXNv1nPMgDrDxoCQI0QAvD_BwE" target="_blank">
                             Effects of Divorce on Children
                         </a>
                         <hr className='line-under-resources'></hr>
@@ -40,21 +40,21 @@ function ResourcesView() {
                  <div>
                  <div>
                      {/* <p>text</p> */}
-                     <a className='link' href="https://themarriagefoundation.org/effects-of-divorce-on-children/?gclid=CjwKCAiAmZGrBhAnEiwAo9qHifncaYm7sHzJiw8RR-JnEcioNxx7gO70nvG725g3pDXNv1nPMgDrDxoCQI0QAvD_BwE">
+                     <a className='link' href="https://themarriagefoundation.org/effects-of-divorce-on-children/?gclid=CjwKCAiAmZGrBhAnEiwAo9qHifncaYm7sHzJiw8RR-JnEcioNxx7gO70nvG725g3pDXNv1nPMgDrDxoCQI0QAvD_BwE" target="_blank">
                          Effects of Divorce on Children
                      </a>
                      <hr className='line-under-resources'></hr>
                  </div>
                  <div>
                      {/* <p>text</p> */}
-                     <a className='link' href="https://afterdivorce.goodsamaritananglican.org/?page=healingafterdivorce">
+                     <a className='link' href="https://afterdivorce.goodsamaritananglican.org/?page=healingafterdivorce" target="_blank">
                          How to Heal From Divorce
                      </a>
                      <hr className='line-under-resources'></hr>
                  </div>
                  <div>
                      {/* <p>text</p> */}
-                     <a className='link' href="https://themarriagefoundation.org/effects-of-divorce-on-children/?gclid=CjwKCAiAmZGrBhAnEiwAo9qHifncaYm7sHzJiw8RR-JnEcioNxx7gO70nvG725g3pDXNv1nPMgDrDxoCQI0QAvD_BwE">
+                     <a className='link' href="https://themarriagefoundation.org/effects-of-divorce-on-children/?gclid=CjwKCAiAmZGrBhAnEiwAo9qHifncaYm7sHzJiw8RR-JnEcioNxx7gO70nvG725g3pDXNv1nPMgDrDxoCQI0QAvD_BwE" target="_blank">
                          Supporting Kids During Divorce
                      </a>
                      <hr className='line-under-resources'></hr>
