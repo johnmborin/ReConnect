@@ -25,12 +25,13 @@ function RegisterForm() {
         dateOfBirth: dateOfBirth,
         city: city,
         state: state,
-
+        email: email,
         username: username,
         password: password,
+        role: role,
       },
     });
-  }; // end registerUser
+    }; 
 
   return (
     <form className="formPanel" onSubmit={registerUser}>
