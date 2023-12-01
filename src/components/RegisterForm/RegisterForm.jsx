@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 // Material UI 
 import TextField from '@mui/material/TextField';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 
 function RegisterForm() {
   const [firstName, setFirstName] = useState('');
@@ -182,17 +184,19 @@ function RegisterForm() {
       </div>
       <div>
         <label htmlFor="role">
-          Family Role:
-          <select
-            name="role"
+          <Select
             value={role}
-            required
             onChange={(event) => setRole(event.target.value)}
+            style={{ borderRadius: '40px', width: '250px' }}
+            displayEmpty
+            inputProps={{ 'aria-label': 'Without label' }}
           >
-            <option value="">Select Role</option>
-            <option value="parent">Parent</option>
-            <option value="child">Child</option>
-          </select>
+            <MenuItem value="" disabled>
+              Select Role
+            </MenuItem>
+            <MenuItem value="parent">Parent</MenuItem>
+            <MenuItem value="child">Child</MenuItem>
+          </Select>
         </label>
       </div>
       <div>
