@@ -53,6 +53,7 @@ function RegisterForm() {
           style: {
             borderRadius: "40px",
             width: "250px",
+            backgroundColor: 'white'
           }
         }}
           label="First Name"
@@ -70,6 +71,7 @@ function RegisterForm() {
           style: {
             borderRadius: "40px",
             width: "250px",
+            backgroundColor: 'white'
           }
         }}
           label="Last Name"
@@ -87,6 +89,7 @@ function RegisterForm() {
           style: {
             borderRadius: "40px",
             width: "250px",
+            backgroundColor: 'white'
           }
         }}
           label="Date of Birth"
@@ -104,6 +107,7 @@ function RegisterForm() {
           style: {
             borderRadius: "40px",
             width: "250px",
+            backgroundColor: 'white'
           }
         }}
           label="City"
@@ -121,6 +125,7 @@ function RegisterForm() {
           style: {
             borderRadius: "40px",
             width: "250px",
+            backgroundColor: 'white'
           }
         }}
           label="State"
@@ -138,6 +143,7 @@ function RegisterForm() {
           style: {
             borderRadius: "40px",
             width: "250px",
+            backgroundColor: 'white'
           }
         }}
           label="Email"
@@ -155,6 +161,7 @@ function RegisterForm() {
           style: {
             borderRadius: "40px",
             width: "250px",
+            backgroundColor: 'white'
           }
         }}
           label="Username"
@@ -172,6 +179,7 @@ function RegisterForm() {
           style: {
             borderRadius: "40px",
             width: "250px",
+            backgroundColor: 'white'
           }
         }}
           label="Password"
@@ -188,7 +196,7 @@ function RegisterForm() {
           <Select
             value={role}
             onChange={(event) => setRole(event.target.value)}
-            style={{ borderRadius: '40px', width: '250px' }}
+            style={{ borderRadius: '40px', width: '250px', backgroundColor: 'white'}}
             displayEmpty
             inputProps={{ 'aria-label': 'Without label' }}
           >
@@ -203,7 +211,7 @@ function RegisterForm() {
       <div>
         <ContainedButton
           variant="contained" 
-          color="primary"     
+          style={{ backgroundColor: '#049BAA'}}    
           type="submit"
         >
           Register
