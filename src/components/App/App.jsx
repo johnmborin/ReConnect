@@ -21,6 +21,8 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import ResourcesView from '../ResourcesView/ResourcesView';
 import CalendarView from '../CalendarView/CalendarView';
+import JournalView from '../JournalView/JournalView';
+
 
 import './App.css';
 
@@ -79,6 +81,7 @@ function App() {
             <CalendarView />
           </ProtectedRoute>
 
+
           <Route
             exact
             path="/login"
@@ -121,6 +124,16 @@ function App() {
             }
           </Route>
 
+          <Route 
+          exact 
+          path="/journal"
+          
+          >
+    
+           <JournalView />
+          </Route>
+
+          
           <Route
             exact
             path="/resources"
