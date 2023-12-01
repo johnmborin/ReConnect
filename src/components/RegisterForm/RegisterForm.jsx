@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import TextField from '@mui/material/TextField';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
+import ContainedButton from '@mui/material/Button';
 
 function RegisterForm() {
   const [firstName, setFirstName] = useState('');
@@ -46,7 +47,7 @@ function RegisterForm() {
           {errors.registrationMessage}
         </h3>
       )}
-      <div>
+      <div style={{ marginBottom: '10px' }}>
         <TextField
         InputProps={{
           style: {
@@ -63,7 +64,7 @@ function RegisterForm() {
           onChange={(event) => setFirstName(event.target.value)}
         />
       </div>
-      <div>
+      <div style={{ marginBottom: '10px' }}>
         <TextField
         InputProps={{
           style: {
@@ -80,7 +81,7 @@ function RegisterForm() {
           onChange={(event) => setLastName(event.target.value)}
         />
       </div>
-      <div>
+      <div style={{ marginBottom: '10px' }}>
         <TextField
         InputProps={{
           style: {
@@ -97,7 +98,7 @@ function RegisterForm() {
           onChange={(event) => setDateOfBirth(event.target.value)}
         />
       </div>
-      <div>
+      <div style={{ marginBottom: '10px' }}>
         <TextField
         InputProps={{
           style: {
@@ -114,7 +115,7 @@ function RegisterForm() {
           onChange={(event) => setCity(event.target.value)}
         />
       </div>
-      <div>
+      <div style={{ marginBottom: '10px' }}>
         <TextField
         InputProps={{
           style: {
@@ -131,7 +132,7 @@ function RegisterForm() {
           onChange={(event) => setState(event.target.value)}
         />
       </div>
-      <div>
+      <div style={{ marginBottom: '10px' }}>
         <TextField
         InputProps={{
           style: {
@@ -148,7 +149,7 @@ function RegisterForm() {
           onChange={(event) => setEmail(event.target.value)}
         />
       </div>
-      <div>
+      <div style={{ marginBottom: '10px' }}>
         <TextField
         InputProps={{
           style: {
@@ -165,7 +166,7 @@ function RegisterForm() {
           onChange={(event) => setUsername(event.target.value)}
         />
       </div>
-      <div>
+      <div style={{ marginBottom: '10px' }}>
         <TextField
         InputProps={{
           style: {
@@ -182,7 +183,7 @@ function RegisterForm() {
           onChange={(event) => setPassword(event.target.value)}
         />
       </div>
-      <div>
+      <div style={{ marginBottom: '20px' }}>
         <label htmlFor="role">
           <Select
             value={role}
@@ -200,7 +201,13 @@ function RegisterForm() {
         </label>
       </div>
       <div>
-        <input className="btn" type="submit" name="submit" value="Register" />
+        <ContainedButton
+          variant="contained" 
+          color="primary"     
+          type="submit"
+        >
+          Register
+        </ContainedButton>
       </div>
     </form>
   );
