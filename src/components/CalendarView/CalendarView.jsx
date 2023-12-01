@@ -2,6 +2,8 @@ import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import dayjs from "dayjs";
 
+import "./CalendarView.css"
+
 // Material UI
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";

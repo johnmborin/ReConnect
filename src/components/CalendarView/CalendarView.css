@@ -1,0 +1,27 @@
+.css-1e6y48t-MuiButtonBase-root-MuiButton-root {
+    display: none !important;
+}
+
+.css-1hbyad5-MuiTypography-root {
+    display: none !important;
+}
+
+.css-4pax7l-MuiPickersLayout-root{
+    justify-content: center !important;
+    padding: 0 !important;
+}
+
+
+.css-15jcv2p-MuiPickersToolbar-content{
+    justify-content: center !important;
+    background-color: orange;
+}
+
+.css-1u23akw-MuiButtonBase-root-MuiPickersDay-root.Mui-selected{
+    background-color: orange !important;
+}
+
+.css-i4bv87-MuiSvgIcon-root{
+    color: rgb(47, 141, 255);
+}
+
