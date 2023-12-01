@@ -19,6 +19,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import Survey from '../Survey/Survey';
 import ResourcesView from '../ResourcesView/ResourcesView';
 import CalendarView from '../CalendarView/CalendarView';
 import JournalView from '../JournalView/JournalView';
@@ -124,6 +125,13 @@ function App() {
             }
           </Route>
 
+          <ProtectedRoute
+            // logged in shows Survey page
+            exact
+            path="/survey"
+          >
+            <Survey />
+          </ProtectedRoute>
           <Route 
           exact 
           path="/journal"
