@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+// Material UI 
+import TextField from '@mui/material/TextField';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import ContainedButton from '@mui/material/Button';
+
 function RegisterForm() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -32,114 +38,166 @@ function RegisterForm() {
   };
 
   return (
-    <form className="formPanel" onSubmit={registerUser}>
+    <form className="formPanel" onSubmit={registerUser} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <h2>Register User</h2>
       {errors.registrationMessage && (
         <h3 className="alert" accessLevel="alert">
           {errors.registrationMessage}
         </h3>
-      )}
-      <div>
-        <label htmlFor="firstName">
-          First Name:
-          <input
-            type="text"
-            name="firstName"
-            value={firstName}
-            required
-            onChange={(event) => setFirstName(event.target.value)}
-          />
-        </label>
+
+      <div style={{ marginBottom: '10px' }}>
+        <TextField
+        InputProps={{
+          style: {
+            borderRadius: "40px",
+            width: "250px",
+            backgroundColor: 'white'
+          }
+        }}
+          label="First Name"
+          variant="outlined"
+          type="text"
+          name="firstName"
+          value={firstName}
+          required
+          onChange={(event) => setFirstName(event.target.value)}
+        />
       </div>
-      <div>
-        <label htmlFor="lastName">
-          Last Name:
-          <input
-            type="text"
-            name="lastName"
-            value={lastName}
-            required
-            onChange={(event) => setLastName(event.target.value)}
-          />
-        </label>
+      <div style={{ marginBottom: '10px' }}>
+        <TextField
+        InputProps={{
+          style: {
+            borderRadius: "40px",
+            width: "250px",
+            backgroundColor: 'white'
+          }
+        }}
+          label="Last Name"
+          variant="outlined"
+          type="text"
+          name="lastName"
+          value={lastName}
+          required
+          onChange={(event) => setLastName(event.target.value)}
+        />
       </div>
-      <div>
-        <label htmlFor="dateOfBirth">
-          Date of Birth:
-          <input
-            type="text"
-            name="dateOfBirth"
-            value={dateOfBirth}
-            required
-            onChange={(event) => setDateOfBirth(event.target.value)}
-          />
-        </label>
+      <div style={{ marginBottom: '10px' }}>
+        <TextField
+        InputProps={{
+          style: {
+            borderRadius: "40px",
+            width: "250px",
+            backgroundColor: 'white'
+          }
+        }}
+          label="Date of Birth"
+          variant="outlined"
+          type="text"
+          name="dateOfBirth"
+          value={dateOfBirth}
+          required
+          onChange={(event) => setDateOfBirth(event.target.value)}
+        />
       </div>
-      <div>
-        <label htmlFor="city">
-          City:
-          <input
-            type="text"
-            name="city"
-            value={city}
-            required
-            onChange={(event) => setCity(event.target.value)}
-          />
-        </label>
+      <div style={{ marginBottom: '10px' }}>
+        <TextField
+        InputProps={{
+          style: {
+            borderRadius: "40px",
+            width: "250px",
+            backgroundColor: 'white'
+          }
+        }}
+          label="City"
+          variant="outlined"
+          type="text"
+          name="city"
+          value={city}
+          required
+          onChange={(event) => setCity(event.target.value)}
+        />
       </div>
-      <div>
-        <label htmlFor="state">
-          State:
-          <input
-            type="text"
-            name="state"
-            value={state}
-            required
-            onChange={(event) => setState(event.target.value)}
-          />
-        </label>
+      <div style={{ marginBottom: '10px' }}>
+        <TextField
+        InputProps={{
+          style: {
+            borderRadius: "40px",
+            width: "250px",
+            backgroundColor: 'white'
+          }
+        }}
+          label="State"
+          variant="outlined"
+          type="text"
+          name="state"
+          value={state}
+          required
+          onChange={(event) => setState(event.target.value)}
+        />
+
+      <div style={{ marginBottom: '10px' }}>
+        <TextField
+        InputProps={{
+          style: {
+            borderRadius: "40px",
+            width: "250px",
+            backgroundColor: 'white'
+          }
+        }}
+          label="Email"
+          variant="outlined"
+          type="text"
+          name="username"
+          value={username}
+          required
+          onChange={(event) => setUsername(event.target.value)}
+        />
+
       </div>
-      <div>
-        <label htmlFor="username">
-          E-Mail:
-          <input
-            type="text"
-            name="username"
-            value={username}
-            required
-            onChange={(event) => setUsername(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="password">
-          Password:
-          <input
-            type="password"
-            name="password"
-            value={password}
-            required
-            onChange={(event) => setPassword(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
+      <div style={{ marginBottom: '10px' }}>
+        <TextField
+        InputProps={{
+          style: {
+            borderRadius: "40px",
+            width: "250px",
+            backgroundColor: 'white'
+          }
+        }}
+          label="Password"
+          variant="outlined"
+          type="password"
+          name="password"
+          value={password}
+          required
+          onChange={(event) => setPassword(event.target.value)}
+        />
+
+      <div style={{ marginBottom: '20px' }}>
         <label htmlFor="accessLevel">
-          Family Role:
-          <select
-            name="accessLevel"
+          <Select
             value={accessLevel}
-            required
             onChange={(event) => setAccessLevel(event.target.value)}
+            style={{ borderRadius: '40px', width: '250px', backgroundColor: 'white'}}
+            displayEmpty
+            required
+            inputProps={{ 'aria-label': 'Without label' }}
           >
-            <option value="">Select Role</option>
-            <option value="parent">Parent</option>
-            <option value="child">Child</option>
-          </select>
+            <MenuItem value="" disabled>
+              Select Role
+            </MenuItem>
+            <MenuItem value="parent">Parent</MenuItem>
+            <MenuItem value="child">Child</MenuItem>
+          </Select>
         </label>
       </div>
       <div>
-        <input className="btn" type="submit" name="submit" value="Register" />
+        <ContainedButton
+          variant="contained" 
+          style={{ backgroundColor: '#049BAA', borderRadius: "40px", width: '150px'}}    
+          type="submit"
+        >
+          Register
+        </ContainedButton>
       </div>
     </form>
   );
