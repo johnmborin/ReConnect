@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 // Material UI 
 import TextField from '@mui/material/TextField';
@@ -8,15 +8,14 @@ import MenuItem from '@mui/material/MenuItem';
 import ContainedButton from '@mui/material/Button';
 
 function RegisterForm() {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [dateOfBirth, setDateOfBirth] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
-  const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [role, setRole] = useState('');
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [accessLevel, setAccessLevel] = useState("");
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
 
@@ -24,29 +23,28 @@ function RegisterForm() {
     event.preventDefault();
 
     dispatch({
-      type: 'REGISTER',
+      type: "REGISTER",
       payload: {
         firstName: firstName,
         lastName: lastName,
         dateOfBirth: dateOfBirth,
         city: city,
         state: state,
-        email: email,
         username: username,
         password: password,
-        role: role,
+        accessLevel: accessLevel,
       },
     });
-    }; 
+  };
 
   return (
     <form className="formPanel" onSubmit={registerUser} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <h2>Register User</h2>
       {errors.registrationMessage && (
-        <h3 className="alert" role="alert">
+        <h3 className="alert" accessLevel="alert">
           {errors.registrationMessage}
         </h3>
-      )}
+
       <div style={{ marginBottom: '10px' }}>
         <TextField
         InputProps={{
@@ -136,7 +134,7 @@ function RegisterForm() {
           required
           onChange={(event) => setState(event.target.value)}
         />
-      </div>
+
       <div style={{ marginBottom: '10px' }}>
         <TextField
         InputProps={{
@@ -149,29 +147,12 @@ function RegisterForm() {
           label="Email"
           variant="outlined"
           type="text"
-          name="email"
-          value={email}
-          required
-          onChange={(event) => setEmail(event.target.value)}
-        />
-      </div>
-      <div style={{ marginBottom: '10px' }}>
-        <TextField
-        InputProps={{
-          style: {
-            borderRadius: "40px",
-            width: "250px",
-            backgroundColor: 'white'
-          }
-        }}
-          label="Username"
-          variant="outlined"
-          type="text"
           name="username"
           value={username}
           required
           onChange={(event) => setUsername(event.target.value)}
         />
+
       </div>
       <div style={{ marginBottom: '10px' }}>
         <TextField
@@ -190,14 +171,15 @@ function RegisterForm() {
           required
           onChange={(event) => setPassword(event.target.value)}
         />
-      </div>
+
       <div style={{ marginBottom: '20px' }}>
-        <label htmlFor="role">
+        <label htmlFor="accessLevel">
           <Select
-            value={role}
-            onChange={(event) => setRole(event.target.value)}
+            value={accessLevel}
+            onChange={(event) => setAccessLevel(event.target.value)}
             style={{ borderRadius: '40px', width: '250px', backgroundColor: 'white'}}
             displayEmpty
+            required
             inputProps={{ 'aria-label': 'Without label' }}
           >
             <MenuItem value="" disabled>
