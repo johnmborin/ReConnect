@@ -1,8 +1,7 @@
 import React from 'react';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import FolderIcon from '@mui/icons-material/Folder';
-import RestoreIcon from '@mui/icons-material/Restore';
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import NoteAltIcon from '@mui/icons-material/NoteAlt';
 import GroupsIcon from '@mui/icons-material/Groups';
@@ -22,9 +21,9 @@ export default function LabelBottomNavigation() {
         onChange={handleChange}
       >
         <BottomNavigationAction
-          label="Recents"
-          value="recents"
-          icon={<RestoreIcon sx={{ color: 'white' }} />}
+          label="Resources"
+          value="Resources"
+          icon={<LibraryBooksIcon sx={{ color: 'white' }} />}
           style={{ color: 'white' }}
         />
         <BottomNavigationAction
