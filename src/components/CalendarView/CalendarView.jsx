@@ -8,6 +8,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { StaticDatePicker } from "@mui/x-date-pickers/StaticDatePicker";
 import { PickersDay } from "@mui/x-date-pickers/PickersDay";
 import Badge from "@mui/material/Badge";
+import CheckIcon from '@mui/icons-material/Check';
 
 // Custom Day component with Badge
 function CustomDay(props) {
@@ -22,7 +23,7 @@ function CustomDay(props) {
     <Badge
       key={day.toString()}
       overlap="circular"
-      badgeContent={isSelected ? "🌚" : undefined}
+      badgeContent={isSelected ? <CheckIcon /> : undefined}
     >
       {/* PickersDay component with Badge */}
       <PickersDay
