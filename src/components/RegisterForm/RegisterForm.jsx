@@ -184,7 +184,7 @@ function RegisterForm() {
         }}
           label="Password"
           variant="outlined"
-          type="text"
+          type="password"
           name="password"
           value={password}
           required
@@ -211,7 +211,7 @@ function RegisterForm() {
       <div>
         <ContainedButton
           variant="contained" 
-          style={{ backgroundColor: '#049BAA'}}    
+          style={{ backgroundColor: '#049BAA', borderRadius: "40px", width: '150px'}}    
           type="submit"
         >
           Register
