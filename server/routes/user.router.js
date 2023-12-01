@@ -44,7 +44,7 @@ router.post("/register", (req, res, next) => {
     req.body.email,
     username,
     password,
-    req.body.role === 'parent' ? 1 : 2, // Set access_level to 1 if role is 'parent'
+    req.body.role === 'parent' ? 1 : 0, // Set access_level to 1 if role is 'parent'
   ];
 
   pool
