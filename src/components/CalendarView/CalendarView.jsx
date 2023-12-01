@@ -55,14 +55,19 @@ export default function StaticDatePickerWithEvents() {
   const handleDateChange = (newValue) => {
     setSelectedDate(newValue);
 
-    // Filter events for the selected date
-    const eventsForDate = events.filter((event) =>
+    // Filter events for the selected day, month, and year
+    const eventsForDay = events.filter((event) =>
       dayjs(event.date).isSame(dayjs(newValue), "day")
     );
 
     // Update selected events
-    setSelectedEvents(eventsForDate);
+    setSelectedEvents(eventsForDay);
   };
+
+  // Fetch and update events when the component mounts
+  React.useEffect(() => {
+    handleDateChange(selectedDate);
+  }, [selectedDate]);
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -71,13 +76,20 @@ export default function StaticDatePickerWithEvents() {
         orientation="portrait"
         value={selectedDate}
         onChange={handleDateChange}
+        onMonthChange={handleDateChange}
         slots={{
           day: CustomDay,
         }}
         slotProps={{
           // Pass highlighted days to CustomDay for badge rendering
           day: {
-            highlightedDays: events.map((event) => dayjs(event.date).date()),
+            highlightedDays: events
+              .filter(
+                (event) =>
+                  dayjs(event.date).isSame(dayjs(selectedDate), "month") &&
+                  dayjs(event.date).isSame(dayjs(selectedDate), "year")
+              )
+              .map((event) => dayjs(event.date).date()),
           },
         }}
       />
