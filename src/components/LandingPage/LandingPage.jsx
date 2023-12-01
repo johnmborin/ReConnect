@@ -20,16 +20,17 @@ function LandingPage() {
     <div className="background">
       <div className="slogan-container">
         <div className="slogan">
-          <h2>Divorce doesn't have to break families apart.</h2>
+          <h2>
+            <span className="Divorce-color">Divorce</span> doesn't have to break families apart.</h2>
         </div>
         <div className="buttons-container">
-          <div className="login-btn">
-            <button className="btn btn_sizeSm" onClick={onLogin}>
+          <div>
+            <button className="btn login-btn" onClick={onLogin}>
               Login
             </button>
           </div>
-          <div className="reg-btn">
-            <button className="btn btn_sizeSm" onClick={onRegister}>
+          <div>
+            <button className="btn reg-btn" onClick={onRegister}>
               Register
             </button>
           </div>
