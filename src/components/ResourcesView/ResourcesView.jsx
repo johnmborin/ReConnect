@@ -14,7 +14,6 @@ function ResourcesView() {
     return (
         <div className='rescources-container'>
             <h2>RESOURCES</h2>
-=======
             {
                 resources.map(resource => (
                     <div>
@@ -23,7 +22,6 @@ function ResourcesView() {
                     </div>
                 ))
             }
-main
         </div>
     );
 }
