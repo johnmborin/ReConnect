@@ -1,14 +1,15 @@
 CREATE TABLE "user" (
-    id SERIAL PRIMARY KEY,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    first_name VARCHAR(255) NOT NULL,
-    last_name VARCHAR(255) NOT NULL,
-    state VARCHAR(255) NOT NULL,
-    city VARCHAR(255) NOT NULL,
-    date_of_birth DATE NOT NULL,
-    password VARCHAR(1000) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    access_level VARCHAR(255) NOT NULL
+  id SERIAL PRIMARY KEY,
+  username VARCHAR(255) UNIQUE NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  first_name VARCHAR(255),
+  last_name VARCHAR(255),
+  date_of_birth DATE,
+  city VARCHAR(255),
+  state VARCHAR(255),
+  email VARCHAR(255),
+  is_parent BOOLEAN DEFAULT true
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE family (
@@ -43,14 +44,18 @@ CREATE TABLE user_event (
 
 CREATE TABLE resource (
     id SERIAL PRIMARY KEY,
+    description VARCHAR(255),
+    url TEXT,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     access_level VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE question (
     id SERIAL PRIMARY KEY,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    question_body VARCHAR (255) 
+    type VARCHAR(255),
+    detail TEXT,
+    hidden BOOLEAN,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE response (
@@ -77,3 +82,36 @@ CREATE TABLE journal (
     date DATE NOT NULL,
     detail TEXT
 );
+
+-- please write an insert statement for each table to add some data to it
+-- Path: insert.sql
+-- INSERT INTO "user" (first_name, last_name, state, city, date_of_birth, password, username, access_level)
+-- VALUES ('John', 'Doe', 'CA', 'San Francisco', '1990-01-01', 'password', 'jerry@gmail.com', 'admin');
+
+INSERT INTO family (id)
+VALUES (1);
+
+INSERT INTO user_family (user_id, family_id)
+VALUES (1, 1);
+
+INSERT INTO event (date, detail, family_id, time, type)
+VALUES ('2020-01-01', 'New Years', 1, '2020-01-01 00:00:00', 'holiday');
+
+INSERT INTO user_event (event_id, user_id, attending)
+VALUES (1, 1, true);
+
+INSERT INTO resource (access_level)
+VALUES ('parent');
+
+INSERT INTO question (id, type, detail, hidden)
+VALUES (1, 'type', 'detail', true);
+
+INSERT INTO response (user_id, date, question_id, response, score)
+VALUES (1, '2020-01-01', 1, 'response', 1);
+
+INSERT INTO prompt (detail)
+VALUES ('detail');
+
+INSERT INTO journal (prompt_id, user_id, date, detail)
+VALUES (1, 1, '2020-01-01', 'detail');
+

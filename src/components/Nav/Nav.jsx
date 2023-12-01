@@ -9,9 +9,9 @@ function Nav() {
 
   return (
     <div className="nav">
-      <Link to="/home">
-        <h2 className="nav-title">Prime Solo Project</h2>
-      </Link>
+        <Link to="/home">
+        <img src="images/ReConnectLogo.png" alt="Logo" className="nav-logo" />
+    </Link>
       <div>
         {/* If no user is logged in, show these links */}
         {!user.id && (
@@ -30,6 +30,14 @@ function Nav() {
 
             <Link className="navLink" to="/info">
               Info Page
+            </Link>
+
+            <Link className="navLink" to="/calendar">
+              Calendar
+            </Link>
+
+            <Link className="navLink" to="/journal">
+              Journal
             </Link>
 
             <LogOutButton className="navLink" />

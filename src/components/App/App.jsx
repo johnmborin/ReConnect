@@ -20,8 +20,13 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import Survey from '../Survey/Survey';
+import ResourcesView from '../ResourcesView/ResourcesView';
+import CalendarView from '../CalendarView/CalendarView';
+import JournalView from '../JournalView/JournalView';
+
 
 import './App.css';
+
 
 function App() {
   const dispatch = useDispatch();
@@ -68,6 +73,15 @@ function App() {
           >
             <InfoPage />
           </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows CalendarView else shows LoginPage
+            exact
+            path="/calendar"
+          >
+            <CalendarView />
+          </ProtectedRoute>
+
 
           <Route
             exact
@@ -118,6 +132,24 @@ function App() {
           >
             <Survey />
           </ProtectedRoute>
+          <Route 
+          exact 
+          path="/journal"
+          
+          >
+    
+           <JournalView />
+          </Route>
+
+          
+          <Route
+            exact
+            path="/resources"
+          >
+            <ResourcesView />
+
+          </Route>
+
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
