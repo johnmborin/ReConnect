@@ -37,7 +37,7 @@ function RegisterForm() {
     }; 
 
   return (
-    <form className="formPanel" onSubmit={registerUser}>
+    <form className="formPanel" onSubmit={registerUser} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <h2>Register User</h2>
       {errors.registrationMessage && (
         <h3 className="alert" role="alert">
@@ -46,6 +46,12 @@ function RegisterForm() {
       )}
       <div>
         <TextField
+        InputProps={{
+          style: {
+            borderRadius: "40px",
+            width: "250px",
+          }
+        }}
           label="First Name"
           variant="outlined"
           type="text"
@@ -57,6 +63,12 @@ function RegisterForm() {
       </div>
       <div>
         <TextField
+        InputProps={{
+          style: {
+            borderRadius: "40px",
+            width: "250px",
+          }
+        }}
           label="Last Name"
           variant="outlined"
           type="text"
@@ -68,6 +80,12 @@ function RegisterForm() {
       </div>
       <div>
         <TextField
+        InputProps={{
+          style: {
+            borderRadius: "40px",
+            width: "250px",
+          }
+        }}
           label="Date of Birth"
           variant="outlined"
           type="text"
@@ -79,6 +97,12 @@ function RegisterForm() {
       </div>
       <div>
         <TextField
+        InputProps={{
+          style: {
+            borderRadius: "40px",
+            width: "250px",
+          }
+        }}
           label="City"
           variant="outlined"
           type="text"
@@ -90,6 +114,12 @@ function RegisterForm() {
       </div>
       <div>
         <TextField
+        InputProps={{
+          style: {
+            borderRadius: "40px",
+            width: "250px",
+          }
+        }}
           label="State"
           variant="outlined"
           type="text"
@@ -101,6 +131,12 @@ function RegisterForm() {
       </div>
       <div>
         <TextField
+        InputProps={{
+          style: {
+            borderRadius: "40px",
+            width: "250px",
+          }
+        }}
           label="Email"
           variant="outlined"
           type="text"
@@ -112,6 +148,12 @@ function RegisterForm() {
       </div>
       <div>
         <TextField
+        InputProps={{
+          style: {
+            borderRadius: "40px",
+            width: "250px",
+          }
+        }}
           label="Username"
           variant="outlined"
           type="text"
@@ -123,6 +165,12 @@ function RegisterForm() {
       </div>
       <div>
         <TextField
+        InputProps={{
+          style: {
+            borderRadius: "40px",
+            width: "250px",
+          }
+        }}
           label="Password"
           variant="outlined"
           type="text"
