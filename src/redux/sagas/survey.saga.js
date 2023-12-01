@@ -5,8 +5,8 @@ import { put, takeLatest } from 'redux-saga/effects';
 //GET
 function* getSurveyList() {
     try {
-        const assetsResponse = yield axios.get('/api/survey');
-        yield put({ type: 'SET_SURVEY', payload: assetsResponse.data});
+        const surveyQuestion = yield axios.get('/api/survey');
+        yield put({ type: 'SET_SURVEY', payload: surveyQuestion.data});
     } catch (error) {
         console.log('ERROR in getSurveyList', error);
         alert('Something went wrong!');
@@ -14,6 +14,15 @@ function* getSurveyList() {
 };
 
 //POST
+function* addSurveyReply(action) {
+    try {
+        const surveyReply = yield axios.post('/api/survey', { response: action.payload.response });
+        yield put({ type: 'SET_REPLY', payload: surveyReply.data });
+    } catch (error) {
+        console.log('ERROR in addSurveyReply', error);
+        alert('Something went wrong!');
+    }
+}
 
 
 //PUT
@@ -25,6 +34,7 @@ function* getSurveyList() {
 
 function* surveySaga() {
     yield takeLatest('FETCH_SURVEY', getSurveyList);
+    yield takeLatest('FETCH_REPLY', addSurveyReply);
 }
 
 export default surveySaga;

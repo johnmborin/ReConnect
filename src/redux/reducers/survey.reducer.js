@@ -9,7 +9,17 @@ const surveyList = (state = [], action) => {
     }
 };
 
+const surveyReply = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_REPLY':
+            return action.payload;
+        default:
+            return state;
+    }
+};
+
   
 export default combineReducers({
     surveyList,
+    surveyReply,
 });
