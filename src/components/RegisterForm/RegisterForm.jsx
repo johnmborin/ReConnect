@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 function RegisterForm() {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [dateOfBirth, setDateOfBirth] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
-  const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [role, setRole] = useState('');
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [accessLevel, setAccessLevel] = useState("");
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
 
@@ -18,30 +17,29 @@ function RegisterForm() {
     event.preventDefault();
 
     dispatch({
-      type: 'REGISTER',
+      type: "REGISTER",
       payload: {
         firstName: firstName,
         lastName: lastName,
         dateOfBirth: dateOfBirth,
         city: city,
         state: state,
-        email: email,
         username: username,
         password: password,
-        role: role,
+        accessLevel: accessLevel,
       },
     });
-    }; 
+  };
 
   return (
     <form className="formPanel" onSubmit={registerUser}>
       <h2>Register User</h2>
       {errors.registrationMessage && (
-        <h3 className="alert" role="alert">
+        <h3 className="alert" accessLevel="alert">
           {errors.registrationMessage}
         </h3>
       )}
-            <div>
+      <div>
         <label htmlFor="firstName">
           First Name:
           <input
@@ -102,20 +100,8 @@ function RegisterForm() {
         </label>
       </div>
       <div>
-        <label htmlFor="email">
-          Email:
-          <input
-            type="text"
-            name="email"
-            value={email}
-            required
-            onChange={(event) => setEmail(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
         <label htmlFor="username">
-          Username:
+          E-Mail:
           <input
             type="text"
             name="username"
@@ -138,13 +124,13 @@ function RegisterForm() {
         </label>
       </div>
       <div>
-        <label htmlFor="role">
+        <label htmlFor="accessLevel">
           Family Role:
           <select
-            name="role"
-            value={role}
+            name="accessLevel"
+            value={accessLevel}
             required
-            onChange={(event) => setRole(event.target.value)}
+            onChange={(event) => setAccessLevel(event.target.value)}
           >
             <option value="">Select Role</option>
             <option value="parent">Parent</option>
