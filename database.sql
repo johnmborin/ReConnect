@@ -57,14 +57,19 @@ CREATE TABLE question (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE question_options (
+    id SERIAL PRIMARY KEY,
+    question_id INT REFERENCES question(id),
+    detail TEXT
+);
+
 CREATE TABLE response (
     id SERIAL PRIMARY KEY,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     user_id INT REFERENCES "user"(id),
     date DATE NOT NULL,
     question_id INT REFERENCES question(id),
-    response TEXT,
-    score INT
+    response TEXT
 );
 
 CREATE TABLE prompt (
