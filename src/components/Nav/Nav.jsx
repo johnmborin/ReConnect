@@ -40,6 +40,10 @@ function Nav() {
               Journal
             </Link>
 
+            <Link className="navLink" to="/survey">
+              Survey
+            </Link>
+
             <LogOutButton className="navLink" />
           </>
         )}
