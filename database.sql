@@ -79,7 +79,8 @@ CREATE TABLE journal (
     prompt_id INT REFERENCES prompt(id),
     user_id INT REFERENCES "user"(id),
     date DATE NOT NULL,
-    detail TEXT
+    detail TEXT,
+    hidden BOOLEAN
 );
 
 -- please write an insert statement for each table to add some data to it

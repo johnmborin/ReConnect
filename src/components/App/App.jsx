@@ -22,8 +22,12 @@ import RegisterPage from "../RegisterPage/RegisterPage";
 import ResourcesView from "../ResourcesView/ResourcesView";
 import CalendarView from "../CalendarView/CalendarView";
 import AdminConsoleView from "../AdminConsoleView/AdminConsoleView";
+import AdminSearchView from "../AdminConsoleView/AdminSearchView/AdminSearchView";
+import AdminQuestions from "../AdminConsoleView/AdminQuestions/AdminQuestions";
+import AdminPrompts from "../AdminConsoleView/AdminPrompts/AdminPrompts";
 
 import "./App.css";
+import AdminResources from "../AdminConsoleView/AdminResources/AdminResources";
 
 function App() {
   const dispatch = useDispatch();
@@ -116,14 +120,46 @@ function App() {
             <ResourcesView />
           </Route>
 
+          <ProtectedRoute exact path="/admin" authRedirect="/user">
+            {user.access_level === "admin" ? (
+              <AdminConsoleView />
+            ) : (
+              <Redirect to="/user" />
+            )}
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path="/admin/resources" authRedirect="/user">
+            {user.access_level === "admin" ? (
+              <AdminResources />
+            ) : (
+              <Redirect to="/user" />
+            )}
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path="/admin/questions" authRedirect="/user">
+            {user.access_level === "admin" ? (
+              <AdminQuestions />
+            ) : (
+              <Redirect to="/user" />
+            )}
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path="/admin/prompts" authRedirect="/user">
+            {user.access_level === "admin" ? (
+              <AdminPrompts />
+            ) : (
+              <Redirect to="/user" />
+            )}
+          </ProtectedRoute>
+
           <ProtectedRoute
             // logged in shows AdminConsoleView else shows LoginPage
             exact
-            path="/admin"
+            path="/admin/search"
             authRedirect="/user"
           >
             {user.access_level === "admin" ? (
-              <AdminConsoleView />
+              <AdminSearchView />
             ) : (
               <Redirect to="/user" />
             )}
