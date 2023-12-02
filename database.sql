@@ -70,7 +70,8 @@ CREATE TABLE response (
 CREATE TABLE prompt (
     id SERIAL PRIMARY KEY,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    detail TEXT
+    detail TEXT,
+    hidden BOOLEAN
 );
 
 CREATE TABLE journal (
@@ -79,8 +80,8 @@ CREATE TABLE journal (
     prompt_id INT REFERENCES prompt(id),
     user_id INT REFERENCES "user"(id),
     date DATE NOT NULL,
-    detail TEXT,
-    hidden BOOLEAN
+    detail TEXT
+
 );
 
 -- please write an insert statement for each table to add some data to it
@@ -109,8 +110,8 @@ VALUES (1, 'type', 'detail', true);
 INSERT INTO response (user_id, date, question_id, response, score)
 VALUES (1, '2020-01-01', 1, 'response', 1);
 
-INSERT INTO prompt (detail)
-VALUES ('detail');
+INSERT INTO prompt (detail, hidden)
+VALUES ('detail', false);
 
 INSERT INTO journal (prompt_id, user_id, date, detail)
 VALUES (1, 1, '2020-01-01', 'detail');
