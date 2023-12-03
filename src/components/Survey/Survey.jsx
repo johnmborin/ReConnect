@@ -2,6 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import dayjs from 'dayjs';
 import { useSelector, useDispatch } from 'react-redux';
 
+import LikertForm from '../LikertForm/LikertForm';
+import FreeForm from '../FreeForm/FreeForm';
+import BooleanForm from '../BooleanForm/BooleanForm';
+
 const likertOptionStyle = {
   padding: '5px',
   cursor: 'pointer',
@@ -9,52 +13,59 @@ const likertOptionStyle = {
 };
 
 function Survey() {
-  const dispatch = useDispatch();
-  const surveyList = useSelector((store) => store.survey.surveyList);
-  const [selectedQuestion, setSelectedQuestion] = useState(null);
-  const [replyBody, setReplyBody] = useState('');
-  const [userId, setUserId] = useState(0);
-  const [score, setScore] = useState(0);
-  const currentDate = dayjs();
-  const likertFormRef = useRef(null);
+  // const dispatch = useDispatch();
+  // const surveyList = useSelector((store) => store.survey.surveyList);
+  // const [selectedQuestion, setSelectedQuestion] = useState(null);
+  // const [replyBody, setReplyBody] = useState('');
+  // const [userId, setUserId] = useState(0);
+  // const [score, setScore] = useState(0);
+  // const currentDate = dayjs();
+  // const likertFormRef = useRef(null);
 
-  useEffect(() => {
-    getSurveyList();
-  }, []);
+  // useEffect(() => {
+  //   getSurveyList();
+  // }, []);
 
-  const getSurveyList = () => {
-    dispatch({ type: 'FETCH_SURVEY' });
-  };
+  // const getSurveyList = () => {
+  //   dispatch({ type: 'FETCH_SURVEY' });
+  // };
 
-  const addSurveyReply = (event) => {
-    event.preventDefault();
+  // const addSurveyReply = (event) => {
+  //   event.preventDefault();
 
-    if (selectedQuestion) {
-      dispatch({
-        type: 'FETCH_REPLY',
-        payload: {
-          response: replyBody,
-          question_id: selectedQuestion.id,
-          score: score,
-          user_id: userId,
-          date: currentDate,
-        },
-      });
-    } else {
-      alert('Please select a question before submitting.');
-    }
-  };
+  //   if (selectedQuestion) {
+  //     dispatch({
+  //       type: 'FETCH_REPLY',
+  //       payload: {
+  //         response: replyBody,
+  //         question_id: selectedQuestion.id,
+  //         score: score,
+  //         user_id: userId,
+  //         date: currentDate,
+  //       },
+  //     });
+  //   } else {
+  //     alert('Please select a question before submitting.');
+  //   }
+  // };
 
-  const handleLikertClick = (selectedScore) => {
-    setScore(selectedScore);
-    if (likertFormRef.current) {
-      likertFormRef.current.dispatchEvent(new Event('submit', { cancelable: true }));
-    }
-  };
+  // const handleLikertClick = (selectedScore) => {
+  //   setScore(selectedScore);
+  //   if (likertFormRef.current) {
+  //     likertFormRef.current.dispatchEvent(new Event('submit', { cancelable: true }));
+  //   }
+  // };
+
+  // const handleBooleanClick = (selectedBoolean) => {
+  // };
 
   return (
     <div>
-      <h2 className='title' style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}>
+    
+    <LikertForm />
+    <FreeForm />
+    <BooleanForm />
+      {/* <h2 className='title' style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}>
         Welcome to the Survey
       </h2>
       <div>
@@ -123,6 +134,27 @@ function Survey() {
         <br />
         <button type='submit'>Submit</button>
       </form>
+      <br></br>
+      <br></br>
+      <h2
+        className='title'
+        style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}
+      >
+        Response Form
+      </h2>
+      {selectedQuestion && (
+        <>
+          {selectedQuestion.type === 'likert' && (
+            <LikertForm handleLikertClick={handleLikertClick} />
+          )}
+          {selectedQuestion.type === 'free form' && (
+            <FreeForm replyBody={replyBody} setReplyBody={setReplyBody} />
+          )}
+          {selectedQuestion.type === 'boolean' && (
+            <BooleanForm handleBooleanClick={handleBooleanClick} />
+          )}
+        </>
+      )} */}
     </div>
   );
 }
