@@ -27,17 +27,15 @@ function AdminQuestions() {
   );
 
   function handleOptionChange(id, event) {
-    if (String(id).startsWith("new-")) {
-      const newOptions = options.map((option) =>
-        option.id === id ? { ...option, value: event.target.value } : option
-      );
-      setOptions(newOptions);
-    } else {
-      const newUpdatedOptions = updatedOptions.map((option) =>
-        option.id === id ? { ...option, value: event.target.value } : option
-      );
-      setUpdatedOptions(newUpdatedOptions);
-    }
+    const newOptions = options.map((option) =>
+      option.id === id ? { ...option, detail: event.target.value } : option
+    );
+    setOptions(newOptions);
+
+    const newUpdatedOptions = updatedOptions.map((option) =>
+      option.id === id ? { ...option, detail: event.target.value } : option
+    );
+    setUpdatedOptions(newUpdatedOptions);
   }
 
   function handleOptionDelete(id) {
