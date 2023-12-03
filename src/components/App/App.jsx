@@ -27,6 +27,10 @@ import JournalView from '../JournalView/JournalView';
 
 import "./App.css";
 import AdminResources from "../AdminConsoleView/AdminResources/AdminResources";
+import AdminQuestions from "../AdminConsoleView/AdminQuestions/AdminQuestions";
+import AdminPrompts from "../AdminConsoleView/AdminPrompts/AdminPrompts";
+import AdminSearchView from "../AdminConsoleView/AdminSearchView/AdminSearchView";
+
 
 function App() {
   const dispatch = useDispatch();
