@@ -90,8 +90,6 @@ CREATE TABLE journal (
 
 );
 
--- please write an insert statement for each table to add some data to it
--- Path: insert.sql
 -- INSERT INTO "user" (first_name, last_name, state, city, date_of_birth, password, username, access_level)
 -- VALUES ('John', 'Doe', 'CA', 'San Francisco', '1990-01-01', 'password', 'jerry@gmail.com', 'admin');
 
