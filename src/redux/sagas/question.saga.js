@@ -40,11 +40,21 @@ function* updateQuestionVisibility(action) {
   }
 }
 
+function* archiveQuestion(action) {
+  try {
+    yield axios.put(`/api/question/archive/${action.payload.id}`);
+    yield put({ type: "FETCH_QUESTION" });
+  } catch (error) {
+    console.log("Archive question request failed", error);
+  }
+}
+
 function* questionSaga() {
   yield takeLatest("FETCH_QUESTION", fetchQuestions);
   yield takeLatest("POST_QUESTION", postQuestion);
   yield takeLatest("UPDATE_QUESTION", updateQuestion);
   yield takeLatest("UPDATE_QUESTION_VISIBILITY", updateQuestionVisibility);
+  yield takeLatest("ARCHIVE_QUESTION", archiveQuestion);
 }
 
 export default questionSaga;

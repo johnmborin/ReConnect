@@ -5,7 +5,7 @@ const router = express.Router();
 router.get("/", async (req, res) => {
   try {
     const queryText = `
-      SELECT q.id, q.detail, q.type, qo.id as option_id, qo.detail as option_detail
+      SELECT q.id, q.detail, q.type, q.hidden, q.archived, qo.id as option_id, qo.detail as option_detail
       FROM question q
       LEFT JOIN question_options qo ON q.id = qo.question_id;
     `;
@@ -18,6 +18,8 @@ router.get("/", async (req, res) => {
           id: row.id,
           detail: row.detail,
           type: row.type,
+          hidden: row.hidden,
+          archived: row.archived,
           options: [],
         };
       }
@@ -32,7 +34,8 @@ router.get("/", async (req, res) => {
 
     const questionsArray = Object.values(questions);
 
-    console.log(JSON.stringify(questionsArray, null, 2));
+    console.log(questionsArray);
+
     res.json(questionsArray);
   } catch (error) {
     console.log("error in question router GET", error);
@@ -57,7 +60,7 @@ router.post("/", async (req, res) => {
       const queryText = `INSERT INTO "question_options" ("question_id", "detail")
       VALUES ($1, $2);`;
       for (let option of req.body.options) {
-        await client.query(queryText, [questionId, option.value]);
+        await client.query(queryText, [questionId, option.detail]);
       }
     }
     await client.query("COMMIT");
@@ -76,42 +79,29 @@ router.put("/:id", async (req, res) => {
   try {
     await client.query("BEGIN");
 
-    // Update question detail and type
-    const updateQuestionQuery = `UPDATE "question" SET "detail" = $1, "type" = $2 WHERE "id" = $3;`;
+    const updateQuestionQuery = `UPDATE "question" SET "type" = $1, "detail" = $2, "hidden" = $3 WHERE "id" = $4;`;
     await client.query(updateQuestionQuery, [
-      req.body.detail,
       req.body.type,
+      req.body.detail,
+      req.body.hidden,
       req.params.id,
     ]);
 
-    // Process new options
-    const newOptionsQuery = `INSERT INTO "question_options" ("question_id", "detail") VALUES ($1, $2);`;
     for (let option of req.body.options) {
-      await client.query(newOptionsQuery, [req.params.id, option.value]);
+      if (String(option.id).startsWith("new-")) {
+        const newOptionsQuery = `INSERT INTO "question_options" ("question_id", "detail") VALUES ($1, $2);`;
+        await client.query(newOptionsQuery, [req.params.id, option.detail]);
+      } else {
+        const updateOptionQuery = `UPDATE "question_options" SET "detail" = $1 WHERE "id" = $2;`;
+        await client.query(updateOptionQuery, [option.detail, option.id]);
+      }
     }
 
-    // Process updated options
-    for (let option of req.body.updatedOptions) {
-      const updateOptionQuery = `UPDATE "question_options" SET "detail" = $1 WHERE "id" = $2;`;
-      await client.query(updateOptionQuery, [option.value, option.id]);
+    for (let optionId of req.body.deleteOptions) {
+      await client.query(`DELETE FROM "question_options" WHERE "id" = $1;`, [
+        optionId,
+      ]);
     }
-
-    // Delete options not present in updatedOptions
-    // const allOptions = await client.query(
-    //   `SELECT "id" FROM "question_options" WHERE "question_id" = $1;`,
-    //   [req.params.id]
-    // );
-    // const updatedOptionsIds = req.body.updatedOptions.map(
-    //   (option) => option.id
-    // );
-
-    // for (let option of allOptions.rows) {
-    //   if (!updatedOptionsIds.includes(option.id)) {
-    //     await client.query(`DELETE FROM "question_options" WHERE "id" = $1;`, [
-    //       option.id,
-    //     ]);
-    //   }
-    // }
 
     await client.query("COMMIT");
     res.sendStatus(200);
@@ -122,6 +112,34 @@ router.put("/:id", async (req, res) => {
   } finally {
     client.release();
   }
+});
+
+router.put("/visibility/:id", (req, res) => {
+  const queryText = `UPDATE "question" SET "hidden" = NOT "hidden" WHERE "id" = $1;`;
+
+  pool
+    .query(queryText, [req.params.id])
+    .then((result) => {
+      res.sendStatus(200);
+    })
+    .catch((error) => {
+      console.log("error in question router PUT", error);
+      res.sendStatus(500);
+    });
+});
+
+router.put("/archive/:id", (req, res) => {
+  const queryText = `UPDATE "question" SET "archived" = true WHERE "id" = $1;`;
+
+  pool
+    .query(queryText, [req.params.id])
+    .then((result) => {
+      res.sendStatus(200);
+    })
+    .catch((error) => {
+      console.log("error in question router PUT", error);
+      res.sendStatus(500);
+    });
 });
 
 module.exports = router;

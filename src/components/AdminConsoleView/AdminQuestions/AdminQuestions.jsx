@@ -7,52 +7,45 @@ function AdminQuestions() {
   const dispatch = useDispatch();
   const optionIdCounter = useRef(0);
 
-  useEffect(() => {
-    dispatch({ type: "FETCH_QUESTION" });
-  }, []);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState({
     id: null,
     detail: "",
     hidden: false,
+    archived: false,
     type: "",
     options: [],
-    updatedOptions: [],
+    deleteOptions: [],
   });
 
   const [options, setOptions] = useState([]);
-  const [updatedOptions, setUpdatedOptions] = useState(
-    currentQuestion.updatedOptions || []
+  const [deleteOptions, setDeleteOptions] = useState(
+    currentQuestion.deleteOptions || []
   );
+
+  useEffect(() => {
+    dispatch({ type: "FETCH_QUESTION" });
+  }, []);
 
   function handleOptionChange(id, event) {
     const newOptions = options.map((option) =>
       option.id === id ? { ...option, detail: event.target.value } : option
     );
     setOptions(newOptions);
-
-    const newUpdatedOptions = updatedOptions.map((option) =>
-      option.id === id ? { ...option, detail: event.target.value } : option
-    );
-    setUpdatedOptions(newUpdatedOptions);
   }
 
   function handleOptionDelete(id) {
-    if (String(id).startsWith("new-")) {
-      const newOptions = options.filter((option) => option.id !== id);
-      setOptions(newOptions);
-    } else {
-      const newUpdatedOptions = updatedOptions.filter(
-        (option) => option.id !== id
-      );
-      setUpdatedOptions(newUpdatedOptions);
+    const newOptions = options.filter((option) => option.id !== id);
+    setOptions(newOptions);
+
+    if (!String(id).startsWith("new-")) {
+      setDeleteOptions([...deleteOptions, id]);
     }
   }
 
   function openModal(question) {
     setCurrentQuestion(
-      question || { id: null, detail: "", hidden: false, type: "" }
+      question || { id: null, detail: "", hidden: false, type: "short" }
     );
     setOptions(question ? question.options : []);
     setIsModalOpen(true);
@@ -66,12 +59,18 @@ function AdminQuestions() {
     dispatch({ type: "UPDATE_QUESTION_VISIBILITY", payload: { id: id } });
   }
 
+  function archiveQuestion(id) {
+    if (window.confirm("Are you sure you want to archive this question?")) {
+      dispatch({ type: "ARCHIVE_QUESTION", payload: { id: id } });
+    }
+  }
+
   function handleSave(e) {
     e.preventDefault();
     if (currentQuestion.id) {
       dispatch({
         type: "UPDATE_QUESTION",
-        payload: { ...currentQuestion, options, updatedOptions },
+        payload: { ...currentQuestion, options, deleteOptions },
       });
     } else {
       dispatch({
@@ -86,19 +85,28 @@ function AdminQuestions() {
     <div className="container">
       <p>Admin Questions</p>
       <ul>
-        {question.map((question) => (
-          <li key={question.id}>
-            {question.detail} - {question.hidden ? "hidden" : "visible"}
-            <button onClick={() => openModal(question)}>Edit question</button>
-            <button
-              onClick={() => {
-                toggleVisibility(question.id);
-              }}
-            >
-              Toggle visibility
-            </button>
-          </li>
-        ))}
+        {question
+          .filter((question) => !question.archived)
+          .map((question) => (
+            <li key={question.id}>
+              {question.detail} - {question.hidden ? "hidden" : "visible"}
+              <button onClick={() => openModal(question)}>Edit question</button>
+              <button
+                onClick={() => {
+                  toggleVisibility(question.id);
+                }}
+              >
+                Toggle visibility
+              </button>
+              <button
+                onClick={() => {
+                  archiveQuestion(question.id);
+                }}
+              >
+                Archive
+              </button>
+            </li>
+          ))}
       </ul>
       <button onClick={() => openModal()}>Add question</button>
 
@@ -149,46 +157,14 @@ function AdminQuestions() {
                   }
                 >
                   <option value="short">Short Response</option>
-                  <option value="single">Multiple Choice</option>
+                  <option value="single">
+                    Multiple Choice - Single Answer
+                  </option>
+                  <option value="multi">
+                    Multiple Choice - Multiple Selection
+                  </option>
                 </select>
               </label>
-
-              {(currentQuestion.type === "single" ||
-                currentQuestion.type === "multi") && (
-                <>
-                  <label>
-                    Single Answer
-                    <input
-                      type="radio"
-                      name="type"
-                      value="single"
-                      defaultChecked
-                      checked={currentQuestion.type === "single"}
-                      onChange={() =>
-                        setCurrentQuestion({
-                          ...currentQuestion,
-                          type: "single",
-                        })
-                      }
-                    />
-                  </label>
-                  <label>
-                    Multiple Answer
-                    <input
-                      type="radio"
-                      name="type"
-                      value="multi"
-                      checked={currentQuestion.type === "multi"}
-                      onChange={() =>
-                        setCurrentQuestion({
-                          ...currentQuestion,
-                          type: "multi",
-                        })
-                      }
-                    />
-                  </label>
-                </>
-              )}
               <br />
               {(currentQuestion.type === "single" ||
                 currentQuestion.type === "multi") &&
@@ -216,7 +192,7 @@ function AdminQuestions() {
                   onClick={() =>
                     setOptions([
                       ...options,
-                      { id: `new-${optionIdCounter.current++}`, value: "" },
+                      { id: `new-${optionIdCounter.current++}`, detail: "" },
                     ])
                   }
                 >

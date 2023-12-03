@@ -54,6 +54,7 @@ CREATE TABLE question (
     type VARCHAR(255),
     detail TEXT,
     hidden BOOLEAN DEFAULT FALSE,
+    archived BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
