@@ -70,7 +70,7 @@ function Survey() {
               border: `2px solid ${selectedQuestion === survey ? 'blue' : 'gray'}`,
             }}
           >
-            <h3>{survey.id}. {survey.question_body}</h3>
+            <h3>{survey.id}. {survey.detail}</h3>
           </div>
         ))}
       </div>
