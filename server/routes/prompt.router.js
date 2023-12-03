@@ -33,7 +33,7 @@ router.post("/", (req, res) => {
     });
 });
 
-router.put("/all/:id", (req, res) => {
+router.put("/:id", (req, res) => {
   const prompt = req.body;
   const queryText = `UPDATE "prompt" SET "detail" = $1, "hidden" = $2 WHERE "id" = $3;`;
 

@@ -1,10 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./AdminQuestions.css";
 
 function AdminQuestions() {
   const question = useSelector((state) => state.question);
   const dispatch = useDispatch();
+  const optionIdCounter = useRef(0);
+
+  useEffect(() => {
+    dispatch({ type: "FETCH_QUESTION" });
+  }, []);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState({
@@ -12,20 +17,46 @@ function AdminQuestions() {
     detail: "",
     hidden: false,
     type: "",
+    options: [],
+    updatedOptions: [],
   });
 
-  const [options, setOptions] = useState(currentQuestion.options || ["", ""]);
+  const [options, setOptions] = useState([]);
+  const [updatedOptions, setUpdatedOptions] = useState(
+    currentQuestion.updatedOptions || []
+  );
 
-  function handleOptionChange(index, event) {
-    const newOptions = [...options];
-    newOptions[index] = event.target.value;
-    setOptions(newOptions);
+  function handleOptionChange(id, event) {
+    if (String(id).startsWith("new-")) {
+      const newOptions = options.map((option) =>
+        option.id === id ? { ...option, value: event.target.value } : option
+      );
+      setOptions(newOptions);
+    } else {
+      const newUpdatedOptions = updatedOptions.map((option) =>
+        option.id === id ? { ...option, value: event.target.value } : option
+      );
+      setUpdatedOptions(newUpdatedOptions);
+    }
+  }
+
+  function handleOptionDelete(id) {
+    if (String(id).startsWith("new-")) {
+      const newOptions = options.filter((option) => option.id !== id);
+      setOptions(newOptions);
+    } else {
+      const newUpdatedOptions = updatedOptions.filter(
+        (option) => option.id !== id
+      );
+      setUpdatedOptions(newUpdatedOptions);
+    }
   }
 
   function openModal(question) {
     setCurrentQuestion(
       question || { id: null, detail: "", hidden: false, type: "" }
     );
+    setOptions(question ? question.options : []);
     setIsModalOpen(true);
   }
 
@@ -40,9 +71,15 @@ function AdminQuestions() {
   function handleSave(e) {
     e.preventDefault();
     if (currentQuestion.id) {
-      dispatch({ type: "UPDATE_QUESTION", payload: currentQuestion });
+      dispatch({
+        type: "UPDATE_QUESTION",
+        payload: { ...currentQuestion, options, updatedOptions },
+      });
     } else {
-      dispatch({ type: "POST_QUESTION", payload: currentQuestion });
+      dispatch({
+        type: "POST_QUESTION",
+        payload: { ...currentQuestion, options },
+      });
     }
     closeModal();
   }
@@ -54,7 +91,7 @@ function AdminQuestions() {
         {question.map((question) => (
           <li key={question.id}>
             {question.detail} - {question.hidden ? "hidden" : "visible"}
-            <button onClick={() => openModal(prompt)}>Edit prompt</button>
+            <button onClick={() => openModal(question)}>Edit question</button>
             <button
               onClick={() => {
                 toggleVisibility(question.id);
@@ -114,23 +151,25 @@ function AdminQuestions() {
                   }
                 >
                   <option value="short">Short Response</option>
-                  <option value="multiple">Multiple Choice</option>
+                  <option value="single">Multiple Choice</option>
                 </select>
               </label>
 
-              {currentQuestion.type === "multiple" && (
+              {(currentQuestion.type === "single" ||
+                currentQuestion.type === "multi") && (
                 <>
                   <label>
                     Single Answer
                     <input
                       type="radio"
-                      name="choiceType"
+                      name="type"
                       value="single"
-                      checked={currentQuestion.choiceType === "single"}
+                      defaultChecked
+                      checked={currentQuestion.type === "single"}
                       onChange={() =>
                         setCurrentQuestion({
                           ...currentQuestion,
-                          choiceType: "single",
+                          type: "single",
                         })
                       }
                     />
@@ -139,13 +178,13 @@ function AdminQuestions() {
                     Multiple Answer
                     <input
                       type="radio"
-                      name="choiceType"
+                      name="type"
                       value="multi"
-                      checked={currentQuestion.choiceType === "multi"}
+                      checked={currentQuestion.type === "multi"}
                       onChange={() =>
                         setCurrentQuestion({
                           ...currentQuestion,
-                          choiceType: "multi",
+                          type: "multi",
                         })
                       }
                     />
@@ -153,27 +192,39 @@ function AdminQuestions() {
                 </>
               )}
               <br />
-              {currentQuestion.type === "multiple" &&
-                options.map((option, index) => (
-                  <div key={index}>
-                    <label>
-                      Option {index + 1}:
-                      <input
-                        type="text"
-                        value={option}
-                        onChange={(event) => handleOptionChange(index, event)}
-                      />
-                    </label>
+              {(currentQuestion.type === "single" ||
+                currentQuestion.type === "multi") &&
+                options.map((option) => (
+                  <div key={option.id}>
+                    <input
+                      type="text"
+                      value={option.detail}
+                      onChange={(event) => handleOptionChange(option.id, event)}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => handleOptionDelete(option.id)}
+                    >
+                      Delete Option
+                    </button>
                     <br />
                   </div>
                 ))}
               <br />
-              <button
-                type="button"
-                onClick={() => setOptions([...options, ""])}
-              >
-                Add Option
-              </button>
+              {(currentQuestion.type === "single" ||
+                currentQuestion.type === "multi") && (
+                <button
+                  type="button"
+                  onClick={() =>
+                    setOptions([
+                      ...options,
+                      { id: `new-${optionIdCounter.current++}`, value: "" },
+                    ])
+                  }
+                >
+                  Add Option
+                </button>
+              )}
               <br />
               <input type="submit" value="Save" />
             </form>

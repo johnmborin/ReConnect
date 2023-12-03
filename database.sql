@@ -53,7 +53,7 @@ CREATE TABLE question (
     id SERIAL PRIMARY KEY,
     type VARCHAR(255),
     detail TEXT,
-    hidden BOOLEAN,
+    hidden BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -76,7 +76,7 @@ CREATE TABLE prompt (
     id SERIAL PRIMARY KEY,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     detail TEXT,
-    hidden BOOLEAN
+    hidden BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE journal (
@@ -109,14 +109,14 @@ VALUES (1, 1, true);
 INSERT INTO resource (access_level)
 VALUES ('parent');
 
-INSERT INTO question (id, type, detail, hidden)
-VALUES (1, 'type', 'detail', true);
+INSERT INTO question (id, type, detail)
+VALUES (1, 'type', 'detail');
 
 INSERT INTO response (user_id, date, question_id, response, score)
 VALUES (1, '2020-01-01', 1, 'response', 1);
 
-INSERT INTO prompt (detail, hidden)
-VALUES ('detail', false);
+INSERT INTO prompt (detail)
+VALUES ('detail');
 
 INSERT INTO journal (prompt_id, user_id, date, detail)
 VALUES (1, 1, '2020-01-01', 'detail');

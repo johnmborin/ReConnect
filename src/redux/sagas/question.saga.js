@@ -19,9 +19,32 @@ function* postQuestion(action) {
   }
 }
 
+function* updateQuestion(action) {
+  try {
+    yield axios.put(`/api/question/${action.payload.id}`, action.payload);
+    yield put({ type: "FETCH_QUESTION" });
+  } catch (error) {
+    console.log("Error with updating question:", error);
+  }
+}
+
+function* updateQuestionVisibility(action) {
+  try {
+    yield axios.put(
+      `/api/question/visibility/${action.payload.id}`,
+      action.payload
+    );
+    yield put({ type: "FETCH_QUESTION" });
+  } catch (error) {
+    console.log("Error with updating question visibility:", error);
+  }
+}
+
 function* questionSaga() {
   yield takeLatest("FETCH_QUESTION", fetchQuestions);
   yield takeLatest("POST_QUESTION", postQuestion);
+  yield takeLatest("UPDATE_QUESTION", updateQuestion);
+  yield takeLatest("UPDATE_QUESTION_VISIBILITY", updateQuestionVisibility);
 }
 
 export default questionSaga;

@@ -21,7 +21,7 @@ function* postPrompt(action) {
 
 function* updatePrompt(action) {
   try {
-    yield axios.put(`/api/prompt/all/${action.payload.id}`, action.payload);
+    yield axios.put(`/api/prompt/${action.payload.id}`, action.payload);
     yield put({ type: "FETCH_PROMPT" });
   } catch (error) {
     console.log("Prompt update request failed", error);
