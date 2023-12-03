@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import dayjs from 'dayjs';
 import { useSelector, useDispatch } from 'react-redux';
 
+import './BooleanForm.css';
+
 function BooleanForm() {
 
     const dispatch = useDispatch();
@@ -44,6 +46,12 @@ function BooleanForm() {
 
     return (
         <div>
+            <h2
+                className='title'
+                style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}
+            >
+                Response Yes or No
+            </h2>
             <div>
                 {surveyList.map((survey) => (
                     <div
@@ -57,21 +65,14 @@ function BooleanForm() {
                             border: `2px solid ${selectedQuestion === survey ? 'blue' : 'gray'}`,
                         }}>
                         <h3>{survey.id}. {survey.detail}</h3>
+                        <button onClick={() => handleBooleanClick(true)}>Yes</button>
+                        <button onClick={() => handleBooleanClick(false)}>No</button>
                     </div>
-
                 ))}
                 <br></br>
                 <br></br>
-                <h2
-                    className='title'
-                    style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}
-                >
-                    Response Yes or No
-                </h2>
-                <div>
-                    <button onClick={() => handleBooleanClick(true)}>True</button>
-                    <button onClick={() => handleBooleanClick(false)}>False</button>
-                </div>
+                <br></br>
+                <br></br>
             </div>
         </div>
     )
