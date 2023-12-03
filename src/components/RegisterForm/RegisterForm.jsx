@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-// Material UI 
-import TextField from '@mui/material/TextField';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-import ContainedButton from '@mui/material/Button';
+// Material UI
+import TextField from "@mui/material/TextField";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import ContainedButton from "@mui/material/Button";
 
 function RegisterForm() {
   const [firstName, setFirstName] = useState("");
@@ -38,22 +38,28 @@ function RegisterForm() {
   };
 
   return (
-    <form className="formPanel" onSubmit={registerUser} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <form
+      className="formPanel"
+      onSubmit={registerUser}
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
       <h2>Register User</h2>
+
       {errors.registrationMessage && (
         <h3 className="alert" accessLevel="alert">
           {errors.registrationMessage}
         </h3>
+      )}
 
-      <div style={{ marginBottom: '10px' }}>
+      <div style={{ marginBottom: "10px" }}>
         <TextField
-        InputProps={{
-          style: {
-            borderRadius: "40px",
-            width: "250px",
-            backgroundColor: 'white'
-          }
-        }}
+          InputProps={{
+            style: {
+              borderRadius: "40px",
+              width: "250px",
+              backgroundColor: "white",
+            },
+          }}
           label="First Name"
           variant="outlined"
           type="text"
@@ -63,15 +69,15 @@ function RegisterForm() {
           onChange={(event) => setFirstName(event.target.value)}
         />
       </div>
-      <div style={{ marginBottom: '10px' }}>
+      <div style={{ marginBottom: "10px" }}>
         <TextField
-        InputProps={{
-          style: {
-            borderRadius: "40px",
-            width: "250px",
-            backgroundColor: 'white'
-          }
-        }}
+          InputProps={{
+            style: {
+              borderRadius: "40px",
+              width: "250px",
+              backgroundColor: "white",
+            },
+          }}
           label="Last Name"
           variant="outlined"
           type="text"
@@ -81,15 +87,15 @@ function RegisterForm() {
           onChange={(event) => setLastName(event.target.value)}
         />
       </div>
-      <div style={{ marginBottom: '10px' }}>
+      <div style={{ marginBottom: "10px" }}>
         <TextField
-        InputProps={{
-          style: {
-            borderRadius: "40px",
-            width: "250px",
-            backgroundColor: 'white'
-          }
-        }}
+          InputProps={{
+            style: {
+              borderRadius: "40px",
+              width: "250px",
+              backgroundColor: "white",
+            },
+          }}
           label="Date of Birth"
           variant="outlined"
           type="text"
@@ -99,15 +105,15 @@ function RegisterForm() {
           onChange={(event) => setDateOfBirth(event.target.value)}
         />
       </div>
-      <div style={{ marginBottom: '10px' }}>
+      <div style={{ marginBottom: "10px" }}>
         <TextField
-        InputProps={{
-          style: {
-            borderRadius: "40px",
-            width: "250px",
-            backgroundColor: 'white'
-          }
-        }}
+          InputProps={{
+            style: {
+              borderRadius: "40px",
+              width: "250px",
+              backgroundColor: "white",
+            },
+          }}
           label="City"
           variant="outlined"
           type="text"
@@ -117,15 +123,15 @@ function RegisterForm() {
           onChange={(event) => setCity(event.target.value)}
         />
       </div>
-      <div style={{ marginBottom: '10px' }}>
+      <div style={{ marginBottom: "10px" }}>
         <TextField
-        InputProps={{
-          style: {
-            borderRadius: "40px",
-            width: "250px",
-            backgroundColor: 'white'
-          }
-        }}
+          InputProps={{
+            style: {
+              borderRadius: "40px",
+              width: "250px",
+              backgroundColor: "white",
+            },
+          }}
           label="State"
           variant="outlined"
           type="text"
@@ -134,16 +140,16 @@ function RegisterForm() {
           required
           onChange={(event) => setState(event.target.value)}
         />
-
-      <div style={{ marginBottom: '10px' }}>
+      </div>
+      <div style={{ marginBottom: "10px" }}>
         <TextField
-        InputProps={{
-          style: {
-            borderRadius: "40px",
-            width: "250px",
-            backgroundColor: 'white'
-          }
-        }}
+          InputProps={{
+            style: {
+              borderRadius: "40px",
+              width: "250px",
+              backgroundColor: "white",
+            },
+          }}
           label="Email"
           variant="outlined"
           type="text"
@@ -152,17 +158,16 @@ function RegisterForm() {
           required
           onChange={(event) => setUsername(event.target.value)}
         />
-
       </div>
-      <div style={{ marginBottom: '10px' }}>
+      <div style={{ marginBottom: "10px" }}>
         <TextField
-        InputProps={{
-          style: {
-            borderRadius: "40px",
-            width: "250px",
-            backgroundColor: 'white'
-          }
-        }}
+          InputProps={{
+            style: {
+              borderRadius: "40px",
+              width: "250px",
+              backgroundColor: "white",
+            },
+          }}
           label="Password"
           variant="outlined"
           type="password"
@@ -171,16 +176,20 @@ function RegisterForm() {
           required
           onChange={(event) => setPassword(event.target.value)}
         />
-
-      <div style={{ marginBottom: '20px' }}>
+      </div>
+      <div style={{ marginBottom: "20px" }}>
         <label htmlFor="accessLevel">
           <Select
             value={accessLevel}
             onChange={(event) => setAccessLevel(event.target.value)}
-            style={{ borderRadius: '40px', width: '250px', backgroundColor: 'white'}}
+            style={{
+              borderRadius: "40px",
+              width: "250px",
+              backgroundColor: "white",
+            }}
             displayEmpty
             required
-            inputProps={{ 'aria-label': 'Without label' }}
+            inputProps={{ "aria-label": "Without label" }}
           >
             <MenuItem value="" disabled>
               Select Role
@@ -192,8 +201,12 @@ function RegisterForm() {
       </div>
       <div>
         <ContainedButton
-          variant="contained" 
-          style={{ backgroundColor: '#049BAA', borderRadius: "40px", width: '150px'}}    
+          variant="contained"
+          style={{
+            backgroundColor: "#049BAA",
+            borderRadius: "40px",
+            width: "150px",
+          }}
           type="submit"
         >
           Register
