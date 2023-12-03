@@ -1,3 +1,7 @@
+import { combineReducers } from 'redux';
+import errors from './errors.reducer';
+import user from './user.reducer';
+import survey from './survey.reducer';
 import { combineReducers } from "redux";
 import errors from "./errors.reducer";
 import user from "./user.reducer";
@@ -18,6 +22,7 @@ import journal from "./journal.reducer";
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user, // will have an id and username if someone is logged in
+  survey,
   family,
   event,
   resource,

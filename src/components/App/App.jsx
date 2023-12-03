@@ -13,18 +13,17 @@ import Footer from "../Footer/Footer";
 
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
-import AboutPage from "../AboutPage/AboutPage";
-import UserPage from "../UserPage/UserPage";
-import InfoPage from "../InfoPage/InfoPage";
-import LandingPage from "../LandingPage/LandingPage";
-import LoginPage from "../LoginPage/LoginPage";
-import RegisterPage from "../RegisterPage/RegisterPage";
-import ResourcesView from "../ResourcesView/ResourcesView";
-import CalendarView from "../CalendarView/CalendarView";
 import AdminConsoleView from "../AdminConsoleView/AdminConsoleView";
-import AdminSearchView from "../AdminConsoleView/AdminSearchView/AdminSearchView";
-import AdminQuestions from "../AdminConsoleView/AdminQuestions/AdminQuestions";
-import AdminPrompts from "../AdminConsoleView/AdminPrompts/AdminPrompts";
+import AboutPage from '../AboutPage/AboutPage';
+import UserPage from '../UserPage/UserPage';
+import InfoPage from '../InfoPage/InfoPage';
+import LandingPage from '../LandingPage/LandingPage';
+import LoginPage from '../LoginPage/LoginPage';
+import RegisterPage from '../RegisterPage/RegisterPage';
+import Survey from '../Survey/Survey';
+import ResourcesView from '../ResourcesView/ResourcesView';
+import CalendarView from '../CalendarView/CalendarView';
+import JournalView from '../JournalView/JournalView';
 
 import "./App.css";
 import AdminResources from "../AdminConsoleView/AdminResources/AdminResources";
@@ -40,7 +39,7 @@ function App() {
 
   return (
     <Router>
-      <div>
+
         <Nav />
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
@@ -83,9 +82,12 @@ function App() {
             <CalendarView />
           </ProtectedRoute>
 
-          <Route exact path="/login">
-            {user.id ? (
-              // If the user is already logged in,
+          <Route
+            exact
+            path="/login"
+          >
+            {user.id ?
+              // If the user is already logged in, 
               // redirect to the /user page
               <Redirect to="/user" />
             ) : (
@@ -116,7 +118,28 @@ function App() {
             )}
           </Route>
 
-          <Route exact path="/resources">
+          <ProtectedRoute
+            // logged in shows Survey page
+            exact
+            path="/survey"
+          >
+            <Survey />
+          </ProtectedRoute>
+          <Route 
+          exact 
+          path="/journal"
+          
+          >
+    
+           <JournalView />
+          </Route>
+
+          
+          <Route
+            exact
+            path="/resources"
+          >
+
             <ResourcesView />
           </Route>
 
@@ -171,7 +194,6 @@ function App() {
           </Route>
         </Switch>
         <Footer />
-      </div>
     </Router>
   );
 }
