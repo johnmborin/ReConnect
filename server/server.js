@@ -9,6 +9,7 @@ const passport = require("./strategies/user.strategy");
 
 // Route includes
 const userRouter = require("./routes/user.router");
+const surveyRouter = require("./routes/survey.router");
 const familyRouter = require("./routes/family.router");
 const eventRouter = require("./routes/event.router");
 const resourceRouter = require("./routes/resource.router");
@@ -30,6 +31,7 @@ app.use(passport.session());
 
 /* Routes */
 app.use("/api/user", userRouter);
+app.use("/api/survey", surveyRouter);
 app.use("/api/family", familyRouter);
 app.use("/api/event", eventRouter);
 app.use("/api/resource", resourceRouter);

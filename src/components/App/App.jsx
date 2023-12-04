@@ -1,40 +1,40 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import {
   HashRouter as Router,
   Redirect,
   Route,
   Switch,
-} from 'react-router-dom';
+} from "react-router-dom";
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 
-import Nav from '../Nav/Nav';
-import Footer from '../Footer/Footer';
+import Nav from "../Nav/Nav";
+import Footer from "../Footer/Footer";
 
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
+import AdminConsoleView from "../AdminConsoleView/AdminConsoleView";
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import Survey from '../Survey/Survey';
 import ResourcesView from '../ResourcesView/ResourcesView';
 import CalendarView from '../CalendarView/CalendarView';
 import JournalView from '../JournalView/JournalView';
 import BottomNavigation from '../BottomNavigation/BottomNavigation';
 
-
-import './App.css';
-
+import "./App.css";
 
 function App() {
   const dispatch = useDispatch();
 
-  const user = useSelector(store => store.user);
+  const user = useSelector((store) => store.user);
 
   useEffect(() => {
-    dispatch({ type: 'FETCH_USER' });
+    dispatch({ type: "FETCH_USER" });
   }, [dispatch]);
 
   return (
@@ -82,7 +82,6 @@ function App() {
             <CalendarView />
           </ProtectedRoute>
 
-
           <Route
             exact
             path="/login"
@@ -91,40 +90,41 @@ function App() {
               // If the user is already logged in, 
               // redirect to the /user page
               <Redirect to="/user" />
-              :
+            ) : (
               // Otherwise, show the login page
               <LoginPage />
-            }
+            )}
           </Route>
 
-          <Route
-            exact
-            path="/registration"
-          >
-            {user.id ?
-              // If the user is already logged in, 
+          <Route exact path="/registration">
+            {user.id ? (
+              // If the user is already logged in,
               // redirect them to the /user page
               <Redirect to="/user" />
-              :
+            ) : (
               // Otherwise, show the registration page
               <RegisterPage />
-            }
+            )}
           </Route>
 
-          <Route
-            exact
-            path="/home"
-          >
-            {user.id ?
-              // If the user is already logged in, 
+          <Route exact path="/home">
+            {user.id ? (
+              // If the user is already logged in,
               // redirect them to the /user page
               <Redirect to="/user" />
-              :
+            ) : (
               // Otherwise, show the Landing page
               <LandingPage />
-            }
+            )}
           </Route>
 
+          <ProtectedRoute
+            // logged in shows Survey page
+            exact
+            path="/survey"
+          >
+            <Survey />
+          </ProtectedRoute>
           <Route 
           exact 
           path="/journal"
@@ -139,10 +139,22 @@ function App() {
             exact
             path="/resources"
           >
-            <ResourcesView />
 
+            <ResourcesView />
           </Route>
 
+          <ProtectedRoute
+            // logged in shows AdminConsoleView else shows LoginPage
+            exact
+            path="/admin"
+            authRedirect="/user"
+          >
+            {user.access_level === "admin" ? (
+              <AdminConsoleView />
+            ) : (
+              <Redirect to="/user" />
+            )}
+          </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
