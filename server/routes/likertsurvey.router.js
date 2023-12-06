@@ -3,11 +3,11 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 /**
- * GET boolean type question
+ * GET likert type question
  */
 router.get('/', (req, res) => {
     console.log('/survey GET route');
-    let queryText = `SELECT * from "question" WHERE "hidden" = false AND "type" = 'boolean' ORDER BY "id" ASC`;
+    let queryText = `SELECT * from "question" WHERE "hidden" = false AND "type" = 'likert' ORDER BY "id" ASC`;
     pool.query(queryText).then((result) => {
         res.send(result.rows);
     }).catch((err) => {

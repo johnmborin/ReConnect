@@ -10,6 +10,8 @@ import responseSaga from "./response.saga";
 import promptSaga from "./prompt.saga";
 import journalSaga from "./journal.saga";
 import surveySaga from './survey.saga';
+import freeformSaga from "./freeform.saga";
+import likertSaga from "./likert.saga";
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -31,5 +33,7 @@ export default function* rootSaga() {
     responseSaga(),
     promptSaga(),
     journalSaga(),
+    freeformSaga(),
+    likertSaga(),
   ]);
 }

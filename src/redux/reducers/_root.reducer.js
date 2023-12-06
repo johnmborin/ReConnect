@@ -9,6 +9,8 @@ import question from "./question.reducer";
 import response from "./response.reducer";
 import prompt from "./prompt.reducer";
 import journal from "./journal.reducer";
+import freeformReducer from './freeform.reducer';
+import likertReducer from './likert.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -27,6 +29,8 @@ const rootReducer = combineReducers({
   response,
   prompt,
   journal,
+  freeformReducer,
+  likertReducer,
 });
 
 export default rootReducer;
