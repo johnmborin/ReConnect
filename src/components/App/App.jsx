@@ -24,6 +24,7 @@ import Survey from '../Survey/Survey';
 import ResourcesView from '../ResourcesView/ResourcesView';
 import CalendarView from '../CalendarView/CalendarView';
 import JournalView from '../JournalView/JournalView';
+import BottomNavigation from '../BottomNavigation/BottomNavigation';
 
 import "./App.css";
 
@@ -160,7 +161,7 @@ function App() {
             <h1>404</h1>
           </Route>
         </Switch>
-        <Footer />
+        <BottomNavigation />
     </Router>
   );
 }
