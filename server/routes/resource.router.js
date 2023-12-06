@@ -4,7 +4,8 @@ const router = express.Router();
 
 router.get("/", (req, res) => {
   // console.log("in resource router GET");
-  const queryText = `SELECT * FROM "resource" ORDER BY "id" ASC;`;
+  const accessLevelQuery = req.user.is_parent ? "Adult": "Child";
+  const queryText = `SELECT * FROM "resource" WHERE access_level = '${accessLevelQuery}' ORDER BY "id" ASC;`;
 
   pool
     .query(queryText)

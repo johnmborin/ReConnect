@@ -63,7 +63,12 @@ function App() {
             exact
             path="/user"
           >
-            <UserPage />
+              {user.id ?? (
+              // If the user is already logged in, 
+              // redirect to the /user page
+              <Redirect to="/calendar" />
+            )}
+           
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -89,7 +94,7 @@ function App() {
             {user.id ?(
               // If the user is already logged in, 
               // redirect to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/calendar" />
             ) : (
               // Otherwise, show the login page
               <LoginPage />
@@ -100,7 +105,7 @@ function App() {
             {user.id ? (
               // If the user is already logged in,
               // redirect them to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/calendar" />
             ) : (
               // Otherwise, show the registration page
               <RegisterPage />
@@ -111,7 +116,7 @@ function App() {
             {user.id ? (
               // If the user is already logged in,
               // redirect them to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/calendar" />
             ) : (
               // Otherwise, show the Landing page
               <LandingPage />

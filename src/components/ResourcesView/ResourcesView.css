@@ -1,5 +1,5 @@
 .rescources-container{
-    color: #1399a3;
+    color: #12646a;
     margin-top: 50px;
     margin-left: 20px;
     margin-right: 20px;
@@ -12,5 +12,9 @@
 }
 
 .link{
+    color: 1399a3;
+}
+
+.link:visited {
     color: #1399a3;
 }

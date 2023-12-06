@@ -9,7 +9,7 @@ function* getSurveyList() {
         yield put({ type: 'SET_SURVEY', payload: surveyQuestion.data});
     } catch (error) {
         console.log('ERROR in getSurveyList', error);
-        alert('Something went wrong!');
+       alert('Something went wrong!');
     }
 };
 
