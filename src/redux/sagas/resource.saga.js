@@ -10,8 +10,38 @@ function* fetchResource() {
   }
 }
 
+function* postResource(action) {
+  try {
+    yield axios.post(`/api/resource/`, action.payload);
+    yield put({ type: "FETCH_RESOURCE" });
+  } catch (error) {
+    console.log("Resource post request failed", error);
+  }
+}
+
+function* updateResource(action) {
+  try {
+    yield axios.put(`/api/resource/${action.payload.id}`, action.payload);
+    yield put({ type: "FETCH_RESOURCE" });
+  } catch (error) {
+    console.log("Resource put request failed", error);
+  }
+}
+
+function* deleteResource(action) {
+  try {
+    yield axios.delete(`/api/resource/${action.payload}`);
+    yield put({ type: "FETCH_RESOURCE" });
+  } catch (error) {
+    console.log("Resource delete request failed", error);
+  }
+}
+
 function* resourceSaga() {
   yield takeLatest("FETCH_RESOURCE", fetchResource);
+  yield takeLatest("POST_RESOURCE", postResource);
+  yield takeLatest("UPDATE_RESOURCE", updateResource);
+  yield takeLatest("DELETE_RESOURCE", deleteResource);
 }
 
 export default resourceSaga;

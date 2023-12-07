@@ -1,0 +1,74 @@
+.journal-view-container {
+    max-width: 800px;
+    margin: auto;
+    background-color: #fff; 
+    padding: 20px;
+    border-radius: 15px;
+    border: 2px solid #EFCD3E; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    font-family: Arial, sans-serif; 
+ }
+ 
+ 
+ .journal-title {
+    text-align: center;
+    color: #1399A3; 
+    margin-bottom: 20px;
+    font-size: 24px; 
+ }
+ 
+ 
+ .journal-view-container input[type="date"],
+ .journal-view-container select,
+ .journal-view-container textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #EFCD3E; 
+    border-radius: 8px; 
+    font-size: 16px;
+    background-color: #fff; 
+ }
+ 
+ 
+ .journal-view-container textarea {
+    resize: vertical;
+    min-height: 100px; 
+ }
+ 
+ 
+ .journal-view-container button {
+    background-color: #1399A3; 
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    margin-right: 10px;
+    border-radius: 8px; 
+    cursor: pointer;
+    transition: background-color 0.3s;
+ }
+ 
+ 
+ .journal-view-container button:hover {
+    background-color: #117a80; 
+ }
+ 
+ 
+ .journal-entry {
+    background-color: #fff; 
+    padding: 15px;
+    margin-top: 15px;
+    border-left: 3px solid #1399A3; 
+    border-radius: 8px; 
+    border: 1px solid #EFCD3E; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+ }
+ 
+ 
+ .journal-entry strong {
+    color: #1399A3; 
+ }
+ 
+ 
+ 
+ 
