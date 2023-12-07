@@ -61,17 +61,12 @@ function App() {
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
 
-          <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
+<ProtectedRoute
+            // logged in shows CalendarView else shows LoginPage
             exact
-            path="/user"
+            path="/calendar"
           >
-              {user.id ? (
-              // If the user is already logged in, 
-              // redirect to the /user page
-              <Redirect to="/calendar" />
-            )}
-           
+            <CalendarView />
           </ProtectedRoute>
 
           <Route
