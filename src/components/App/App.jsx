@@ -67,20 +67,19 @@ function App() {
           exact
           path="/user"
         >
-          {user.id ?? (
-            // If the user is already logged in, 
+          {user.id ? (
+            // If the user is already logged in,
             // redirect to the /user page
             <Redirect to="/calendar" />
+          ) : (
+            // Otherwise, show the login page
+            <CalendarView />
           )}
-
         </ProtectedRoute>
 
-        <Route
-          exact
-          path="/login"
-        >
+        <Route exact path="/login">
           {user.id ? (
-            // If the user is already logged in, 
+            // If the user is already logged in,
             // redirect to the /user page
             <Redirect to="/calendar" />
           ) : (
@@ -100,14 +99,6 @@ function App() {
           )}
         </Route>
 
-        <ProtectedRoute
-            // logged in shows CalendarView else shows LoginPage
-            exact
-            path="/calendar"
-          >
-            <CalendarView />
-          </ProtectedRoute>
-
         <Route exact path="/home">
           {user.id ? (
             // If the user is already logged in,
@@ -119,17 +110,11 @@ function App() {
           )}
         </Route>
 
-        <ProtectedRoute
-          exact
-          path="/user"
-        >
+        <ProtectedRoute exact path="/user">
           <UserPage />
         </ProtectedRoute>
 
-        <ProtectedRoute
-          exact
-          path="/info"
-        >
+        <ProtectedRoute exact path="/info">
           <InfoPage />
         </ProtectedRoute>
 
