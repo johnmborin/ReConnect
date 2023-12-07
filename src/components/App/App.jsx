@@ -28,6 +28,7 @@ import Survey from "../Survey/Survey";
 import ResourcesView from "../ResourcesView/ResourcesView";
 import CalendarView from "../CalendarView/CalendarView";
 import JournalView from "../JournalView/JournalView";
+import BottomNavigation from "../BottomNavigation/BottomNavigation"
 
 import "./App.css";
 
@@ -61,54 +62,62 @@ function App() {
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
 
-          <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
+        <ProtectedRoute
+          // logged in shows UserPage else shows LoginPage
+          exact
+          path="/user"
+        >
+          {user.id ?? (
+            // If the user is already logged in, 
+            // redirect to the /user page
+            <Redirect to="/calendar" />
+          )}
+
+        </ProtectedRoute>
+
+        <Route
+          exact
+          path="/login"
+        >
+          {user.id ? (
+            // If the user is already logged in, 
+            // redirect to the /user page
+            <Redirect to="/calendar" />
+          ) : (
+            // Otherwise, show the login page
+            <LoginPage />
+          )}
+        </Route>
+
+        <Route exact path="/registration">
+          {user.id ? (
+            // If the user is already logged in,
+            // redirect them to the /user page
+            <Redirect to="/calendar" />
+          ) : (
+            // Otherwise, show the registration page
+            <RegisterPage />
+          )}
+        </Route>
+
+        <ProtectedRoute
+            // logged in shows CalendarView else shows LoginPage
             exact
-            path="/user"
+            path="/calendar"
           >
-              {user.id ? (
-              // If the user is already logged in, 
-              // redirect to the /user page
-              <Redirect to="/calendar" />
-            )}
-           
+            <CalendarView />
           </ProtectedRoute>
 
-          <Route
-            exact
-            path="/login"
-          >
-            {user.id ?(
-              // If the user is already logged in, 
-              // redirect to the /user page
-              <Redirect to="/calendar" />
-            ) : (
-              // Otherwise, show the login page
-              <LoginPage />
-            )}
-          </Route>
-
-          <Route exact path="/registration">
-            {user.id ? (
-              // If the user is already logged in,
-              // redirect them to the /user page
-              <Redirect to="/calendar" />
-            ) : (
-              // Otherwise, show the registration page
-              <RegisterPage />
-            )}
-          </Route>
-
-          <Route exact path="/home">
-            {user.id ? (
-              // If the user is already logged in,
-              // redirect them to the /user page
-              <Redirect to="/calendar" />
-            ) : (
-              // Otherwise, show the Landing page
-              <LandingPage />
-            )}
-          </Route>
+        <Route exact path="/home">
+          {user.id ? (
+            // If the user is already logged in,
+            // redirect them to the /user page
+            <Redirect to="/calendar" />
+          ) : (
+            // Otherwise, show the Landing page
+            <LandingPage />
+          )}
+        </Route>
 
         <ProtectedRoute
           exact
@@ -149,6 +158,7 @@ function App() {
         <Route exact path="/resources">
           <ResourcesView />
         </Route>
+      
 
         <ProtectedRoute
           // logged in shows AdminConsoleView else shows LoginPage
@@ -194,12 +204,12 @@ function App() {
             <Redirect to="/user" />
           )}
         </ProtectedRoute>
-        <BottomNavigation />
         {/* If none of the other routes matched, we will show a 404. */}
         <Route>
           <h1>404</h1>
         </Route>
       </Switch>
+      <BottomNavigation />
     </Router>
   );
 }

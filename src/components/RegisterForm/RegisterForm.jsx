@@ -112,6 +112,7 @@ function RegisterForm() {
               borderRadius: "40px",
               width: "250px",
               backgroundColor: "white",
+            }
           }}
           label="City"
           variant="outlined"
@@ -129,6 +130,7 @@ function RegisterForm() {
               borderRadius: "40px",
               width: "250px",
               backgroundColor: "white",
+            }
           }}
           label="State"
           variant="outlined"
@@ -146,6 +148,7 @@ function RegisterForm() {
               borderRadius: "40px",
               width: "250px",
               backgroundColor: "white",
+            }
           }}
           label="Email"
           variant="outlined"
