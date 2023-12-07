@@ -1,27 +1,34 @@
 .journal-view-container {
     max-width: 800px;
-    margin: auto;
-    background-color: #fff; 
+    margin-top: 20px;
+    margin-right: 14px;
+    margin-left: 14px;
+    background-color: #dedede; 
     padding: 20px;
     border-radius: 15px;
     border: 2px solid #EFCD3E; 
+    background-color: #EFCD3E;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     font-family: Arial, sans-serif; 
  }
  
  
  .journal-title {
-    text-align: center;
-    color: #1399A3; 
+    text-align: left;
     margin-bottom: 20px;
     font-size: 24px; 
+    color: #12646a;
+    
+ }
+
+ .prompt-styling{
+   margin-bottom: 50px;
  }
  
  
  .journal-view-container input[type="date"],
  .journal-view-container select,
  .journal-view-container textarea {
-    width: 100%;
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #EFCD3E; 
@@ -33,7 +40,12 @@
  
  .journal-view-container textarea {
     resize: vertical;
+    width: 93%;
     min-height: 100px; 
+ }
+
+ .journal-view-container input[type="date"]{
+   width: 92%;
  }
  
  
