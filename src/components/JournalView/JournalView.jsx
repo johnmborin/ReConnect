@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Select, MenuItem, InputLabel, FormControl, Divider } from '@mui/material';
 import axios from 'axios';
 import './JournalView.css';
 
@@ -39,10 +40,10 @@ const JournalView = () => {
         { id: 28, detail: "What makes you feel calm?" },
         { id: 29, detail: "What makes you feel powerful?" },
         { id: 30, detail: "Who do you trust most and why?" }
-       
+
     ];
 
-    
+
 
     useEffect(() => {
         fetchEntries();
@@ -59,11 +60,14 @@ const JournalView = () => {
             })
             .catch(error => console.error('Error fetching journal entries:', error));
     };
+    const handleSelectChange = (event) => {
+        setSelectedPromptId(event.target.value);
+    };
 
     const saveEntry = () => {
         const entryData = {
             prompt_id: selectedPromptId,
-            user_id: 1, 
+            user_id: 1,
             date: entryDate,
             detail: currentEntry,
         };
@@ -102,28 +106,37 @@ const JournalView = () => {
     const promptMap = prompts.reduce((map, prompt) => {
         map[prompt.id] = prompt.detail;
         return map;
-      }, {});
-      
+    }, {});
+
 
     return (
         <div className="journal-view-container">
-        <h1 className="journal-title">JOURNAL</h1> 
-            <input 
-                type="date" 
+            <h1 className="journal-title">JOURNAL</h1>
+            <input
+                type="date"
                 value={entryDate}
-                onChange={(e) => setEntryDate(e.target.value)} 
+                onChange={(e) => setEntryDate(e.target.value)}
             />
-            <select 
-                value={selectedPromptId}
-                onChange={(e) => setSelectedPromptId(e.target.value)}>
-                <option value="">Choose a prompt...</option>
-                {prompts.map(prompt => (
-                    <option key={prompt.id} value={prompt.id}>{prompt.detail}</option>
-                ))}
-            </select>
-            <textarea 
-                rows="5"
-                cols="33"
+            <FormControl style={{ backgroundColor: 'white', marginBottom: '15px' }} fullWidth>
+                <InputLabel id="promptDropdownLabel">Choose a prompt:</InputLabel>
+                <Select
+                    labelId="promptDropdownLabel"
+                    id="promptDropdown"
+                    value={selectedPromptId}
+                    onChange={handleSelectChange}
+                    style={{ maxWidth: '100%' }}
+
+                >
+                    <MenuItem value="">Choose a prompt...</MenuItem>
+                    {prompts.map((prompt) => (
+                        <MenuItem key={prompt.id} value={prompt.id} style={{ whiteSpace: 'normal', borderBottom: '1px solid #e0e0e0' }}>
+                            {prompt.detail}
+
+                        </MenuItem>
+                    ))}
+                </Select>
+            </FormControl>
+            <textarea
                 placeholder="Write your journal entry here..."
                 value={currentEntry}
                 onChange={(e) => setCurrentEntry(e.target.value)}
@@ -132,14 +145,14 @@ const JournalView = () => {
                 {editingEntryId ? 'Update Entry' : 'Save Entry'}
             </button>
             <div>
-      {entries.map(entry => (
-        <div key={entry.id} className="journal-entry">
-          <strong>Date:</strong> {entry.date}<br />
-          <strong>Prompt:</strong> {promptMap[entry.prompt_id]}<br />
-          <strong>Entry:</strong> {entry.detail}<br />
-          <button onClick={() => editEntry(entry)}>Edit</button>
-          <button onClick={() => deleteEntry(entry.id)}>Delete</button>
-        </div>
+                {entries.map(entry => (
+                    <div key={entry.id} className="journal-entry">
+                        <strong>Date:</strong> {entry.date}<br />
+                        <strong>Prompt:</strong> {promptMap[entry.prompt_id]}<br />
+                        <strong>Entry:</strong> {entry.detail}<br />
+                        <button onClick={() => editEntry(entry)}>Edit</button>
+                        <button onClick={() => deleteEntry(entry.id)}>Delete</button>
+                    </div>
                 ))}
             </div>
         </div>

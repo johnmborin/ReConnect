@@ -14,14 +14,14 @@
 
 .css-15jcv2p-MuiPickersToolbar-content{
     justify-content: center !important;
-    background-color: orange;
+    color: #12646a;
 }
 
 .css-1u23akw-MuiButtonBase-root-MuiPickersDay-root.Mui-selected{
-    background-color: orange !important;
+    background-color: #12646a !important;
 }
 
 .css-i4bv87-MuiSvgIcon-root{
-    color: rgb(47, 141, 255);
+    color: #EFCD3E;
 }
 
