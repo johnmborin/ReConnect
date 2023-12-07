@@ -28,7 +28,7 @@ import Survey from "../Survey/Survey";
 import ResourcesView from "../ResourcesView/ResourcesView";
 import CalendarView from "../CalendarView/CalendarView";
 import JournalView from "../JournalView/JournalView";
-import BottomNavigation from "../BottomNavigation/BottomNavigation";
+import BottomNavigation from "../BottomNavigation/BottomNavigation"
 
 import "./App.css";
 
@@ -143,6 +143,7 @@ function App() {
         <Route exact path="/resources">
           <ResourcesView />
         </Route>
+      
 
         <ProtectedRoute
           // logged in shows AdminConsoleView else shows LoginPage
@@ -188,12 +189,12 @@ function App() {
             <Redirect to="/user" />
           )}
         </ProtectedRoute>
-        <BottomNavigation />
         {/* If none of the other routes matched, we will show a 404. */}
         <Route>
           <h1>404</h1>
         </Route>
       </Switch>
+      <BottomNavigation />
     </Router>
   );
 }
