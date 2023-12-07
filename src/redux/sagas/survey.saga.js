@@ -12,15 +12,19 @@ function* getSurveyList() {
 }
 
 function* addSurveyReply(action) {
-  try {
-    const surveyReply = yield axios.post("/api/survey", {
-      response: action.payload.response,
-    });
-    yield put({ type: "SET_REPLY", payload: surveyReply.data });
-  } catch (error) {
-    console.log("ERROR in addSurveyReply", error);
-    alert("Something went wrong!");
-  }
+    try {
+        const surveyReply = yield axios.post('/api/survey', { 
+            response: action.payload.response,
+            user_id: action.payload.user_id,
+            question_id: action.payload.question_id,
+            score: action.payload.score,
+            date: action.payload.date,
+         });
+        yield put({ type: 'SET_REPLY', payload: surveyReply.data });
+    } catch (error) {
+        console.log('ERROR in addSurveyReply', error);
+        alert('Something went wrong!');
+    }
 }
 
 //PUT
