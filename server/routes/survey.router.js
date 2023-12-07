@@ -1,10 +1,11 @@
-const express = require('express');
-const pool = require('../modules/pool');
+const express = require("express");
+const pool = require("../modules/pool");
 const router = express.Router();
 
 /**
  * GET boolean type question
  */
+
 router.get('/', (req, res) => {
     console.log('/survey GET route');
     let queryText = `SELECT * from "question" WHERE "hidden" = false AND "type" = 'boolean' ORDER BY "id" ASC`;
@@ -14,21 +15,24 @@ router.get('/', (req, res) => {
         console.log(err);
         res.sendStatus(500);
     })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(500);
+    });
 });
 
-router.post('/', (req, res) => {
-    console.log('/survey POST route');
-    console.log(req.body);
-    console.log('is authenticated?', req.isAuthenticated());
+router.post("/", (req, res) => {
+  console.log("/survey POST route");
+  console.log(req.body);
+  console.log("is authenticated?", req.isAuthenticated());
 
-    if (req.isAuthenticated()) {
-        console.log('user', req.user);
+  if (req.isAuthenticated()) {
+    console.log("user", req.user);
 
-        let queryText = `
+    let queryText = `
     INSERT INTO "response" ("response", "user_id", "date", "question_id", "score")
     VALUES ($1, $2, $3, $4, $5);
 `;
-
         const queryParams = [
             req.body.response,
             req.user.id,
@@ -36,21 +40,19 @@ router.post('/', (req, res) => {
             req.body.question_id, 
             req.body.score,      
         ];
-
-
-        pool.query(queryText, queryParams)
-            .then(result => {
-                res.sendStatus(201);
-            })
-            .catch(error => {
-                console.log(error);
-                res.sendStatus(500);
-            });
-    } else {
-        res.sendStatus(401);
-    }
+    pool
+      .query(queryText, queryParams)
+      .then((result) => {
+        res.sendStatus(201);
+      })
+      .catch((error) => {
+        console.log(error);
+        res.sendStatus(500);
+      });
+  } else {
+    res.sendStatus(401);
+  }
 });
-
 
 // router.get('/', (req, res) => {
 //     console.log('/survey GET route');

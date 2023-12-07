@@ -1,9 +1,9 @@
-const promptReducer = (state = {}, action) => {
+const promptReducer = (state = [], action) => {
   switch (action.type) {
     case "SET_PROMPT":
       return action.payload;
     case "UNSET_PROMPT":
-      return {};
+      return [];
     default:
       return state;
   }

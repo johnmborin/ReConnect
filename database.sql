@@ -55,8 +55,15 @@ CREATE TABLE question (
     id SERIAL PRIMARY KEY,
     type VARCHAR(255),
     detail TEXT,
-    hidden BOOLEAN,
+    hidden BOOLEAN DEFAULT FALSE,
+    archived BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE question_options (
+    id SERIAL PRIMARY KEY,
+    question_id INT REFERENCES question(id),
+    detail TEXT
 );
 
 CREATE TABLE response (
@@ -65,14 +72,14 @@ CREATE TABLE response (
     user_id INT REFERENCES "user"(id),
     date DATE NOT NULL,
     question_id INT REFERENCES question(id),
-    response TEXT,
-    score INT
+    response TEXT
 );
 
 CREATE TABLE prompt (
     id SERIAL PRIMARY KEY,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    detail TEXT
+    detail TEXT,
+    hidden BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE journal (
@@ -82,10 +89,9 @@ CREATE TABLE journal (
     user_id INT REFERENCES "user"(id),
     date DATE NOT NULL,
     detail TEXT
+
 );
 
--- please write an insert statement for each table to add some data to it
--- Path: insert.sql
 -- INSERT INTO "user" (first_name, last_name, state, city, date_of_birth, password, username, access_level)
 -- VALUES ('John', 'Doe', 'CA', 'San Francisco', '1990-01-01', 'password', 'jerry@gmail.com', 'admin');
 
@@ -104,8 +110,8 @@ VALUES (1, 1, true);
 INSERT INTO resource (access_level)
 VALUES ('parent');
 
-INSERT INTO question (id, type, detail, hidden)
-VALUES (1, 'type', 'detail', true);
+INSERT INTO question (id, type, detail)
+VALUES (1, 'type', 'detail');
 
 INSERT INTO response (user_id, date, question_id, response, score)
 VALUES (1, '2020-01-01', 1, 'response', 1);
