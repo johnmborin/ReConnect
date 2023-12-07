@@ -28,15 +28,9 @@ function Nav() {
           <>
 
 
-<<<<<<< HEAD
-            <Link className="navLink" to="/survey">
-              Survey
-            </Link>
-=======
             {/* <Link className="navLink" to="/survey">
               Survey
             </Link> */}
->>>>>>> c3aef5e894d4efe4be432de1bab46955728fd8a6
 
             <LogOutButton className="navLink" />
           </>
