@@ -24,7 +24,7 @@ function LabelBottomNavigation() {
           <>
             <BottomNavigation
                 showLabels
-                sx={{ backgroundColor: '#1399a3', color: 'white', width: 400 }}
+                sx={{ backgroundColor: '#1399a3', color: 'white'}}
                 value={value}
                 onChange={handleChange}
             >
@@ -68,7 +68,7 @@ function LabelBottomNavigation() {
           <>
             <BottomNavigation
                 showLabels
-                sx={{ backgroundColor: '#1399a3', color: 'white', width: 400 }}
+                sx={{ backgroundColor: '#1399a3', color: 'white'}}
                 value={value}
                 onChange={handleChange}
             >
