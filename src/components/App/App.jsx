@@ -140,6 +140,14 @@ function App() {
           <JournalView />
         </Route>
 
+        <ProtectedRoute
+            // logged in shows CalendarView else shows LoginPage
+            exact
+            path="/calendar"
+          >
+            <CalendarView />
+          </ProtectedRoute>
+
         <Route exact path="/resources">
           <ResourcesView />
         </Route>
@@ -188,13 +196,12 @@ function App() {
             <Redirect to="/user" />
           )}
         </ProtectedRoute>
-
-        <BottomNavigation />
         {/* If none of the other routes matched, we will show a 404. */}
         <Route>
           <h1>404</h1>
         </Route>
       </Switch>
+      <BottomNavigation />
     </Router>
   );
 }
