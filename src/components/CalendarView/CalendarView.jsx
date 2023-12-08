@@ -2,7 +2,7 @@ import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import dayjs from "dayjs";
 
-import "./CalendarView.css"
+import "./CalendarView.css";
 
 // Material UI
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -10,7 +10,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { StaticDatePicker } from "@mui/x-date-pickers/StaticDatePicker";
 import { PickersDay } from "@mui/x-date-pickers/PickersDay";
 import Badge from "@mui/material/Badge";
-import CheckIcon from '@mui/icons-material/Check';
+import CheckIcon from "@mui/icons-material/Check";
 
 // Custom Day component with Badge
 function CustomDay(props) {
@@ -75,6 +75,35 @@ export default function StaticDatePickerWithEvents() {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       {/* StaticDatePicker with custom day rendering */}
+
+      <h2>All Events</h2>
+      {events.map((event, index) => (
+        <div key={index}>
+          {event.date} - {event.detail} ({event.time})
+        </div>
+      ))}
+
+      <h2>Selected Date</h2>
+      <div>{selectedDate.format("MM/DD/YYYY")}</div>
+
+      <h2>Add Event</h2>
+      <input type="text" id="detail" />
+      <input type="time" id="time" />
+      <button
+        onClick={() =>
+          dispatch({
+            type: "POST_EVENT",
+            payload: {
+              date: selectedDate.format("MM/DD/YYYY"),
+              detail: document.getElementById("detail").value,
+              time: document.getElementById("time").value,
+            },
+          })
+        }
+      >
+        Add Event
+      </button>
+
       <StaticDatePicker
         orientation="portrait"
         value={selectedDate}
