@@ -10,8 +10,18 @@ function* fetchEvent() {
   }
 }
 
+function* postEvent(action) {
+  try {
+    yield axios.post("/api/event", action.payload);
+    yield put({ type: "FETCH_EVENT" });
+  } catch (error) {
+    console.log("Error with user logout:", error);
+  }
+}
+
 function* eventSaga() {
   yield takeLatest("FETCH_EVENT", fetchEvent);
+  yield takeLatest("POST_EVENT", postEvent);
 }
 
 export default eventSaga;
