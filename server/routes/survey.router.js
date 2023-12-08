@@ -30,7 +30,7 @@ router.post("/", (req, res) => {
     console.log("user", req.user);
 
     let queryText = `
-    INSERT INTO "response" ("response", "user_id", "date", "question_id", "score")
+    INSERT INTO "response" ("response", "user_id", "date", "question_id", "response")
     VALUES ($1, $2, $3, $4, $5);
 `;
         const queryParams = [

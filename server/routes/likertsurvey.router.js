@@ -25,16 +25,15 @@ router.post('/', (req, res) => {
         console.log('user', req.user);
 
         let queryText = `
-    INSERT INTO "response" ("response", "user_id", "date", "question_id", "score")
-    VALUES ($1, $2, $3, $4, $5);
+    INSERT INTO "response" ("response", "user_id", "date", "question_id")
+    VALUES ($1, $2, $3, $4);
 `;
 
         const queryParams = [
             req.body.response,
             req.user.id,
             req.body.date,
-            req.body.question_id, 
-            req.body.score,      
+            req.body.question_id,    
         ];
 
 

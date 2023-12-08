@@ -30,8 +30,7 @@ function FreeForm() {
                 type: 'FETCH_REPLY_FREEFORM',
                 payload: {
                     response: replyBody,
-                    question_id: selectedQuestion.id,
-                    score: score,
+                    question_id: selectedQuestion.id,   
                     user_id: userId,
                     date: currentDate,
                 },
