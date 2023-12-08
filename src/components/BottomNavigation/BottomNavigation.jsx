@@ -20,7 +20,7 @@ function LabelBottomNavigation() {
 
     return (
         <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}>
-        {user.id && user.access_level === 'parent' || user.access_level === 'admin' && (
+        {user.id && (user.access_level === 'parent' || user.access_level === 'admin') && (
           <>
             <BottomNavigation
                 showLabels
