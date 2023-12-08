@@ -20,7 +20,7 @@ function LabelBottomNavigation() {
 
     return (
         <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}>
-        {user.id && user.is_parent && (
+        {user.id && (user.access_level === 'parent' || user.access_level === 'admin') && (
           <>
             <BottomNavigation
                 showLabels
@@ -52,7 +52,7 @@ function LabelBottomNavigation() {
                     component={Link}
                     to="/calendar"
                 />
-                <BottomNavigationAction
+                {/* <BottomNavigationAction
                     label="Join Family"
                     value="Family"
                     icon={<GroupsIcon sx={{ color: 'white' }} />}
@@ -60,11 +60,11 @@ function LabelBottomNavigation() {
                    // ADD ROUTE TO JOIN FAMILY ONCE CREATED
                     //component={Link}
                     //to="/family"
-                />
+                /> */}
             </BottomNavigation>
             </>
              )}
-             {user.id && user.access_level==="child" && (
+             {user.id && user.access_level === 'child' && (
           <>
             <BottomNavigation
                 showLabels
@@ -104,7 +104,7 @@ function LabelBottomNavigation() {
                     component={Link}
                     to="/survey"
                 />
-                <BottomNavigationAction
+                {/* <BottomNavigationAction
                     label="Join Family"
                     value="Family"
                     icon={<GroupsIcon sx={{ color: 'white' }} />}
@@ -112,7 +112,7 @@ function LabelBottomNavigation() {
                    // ADD ROUTE TO JOIN FAMILY ONCE CREATED
                     //component={Link}
                     //to="/family"
-                />
+                /> */}
             </BottomNavigation>
             </>
              )}
