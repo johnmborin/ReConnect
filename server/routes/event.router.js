@@ -23,4 +23,39 @@ router.get("/", (req, res) => {
     });
 });
 
+router.post("/", (req, res) => {
+  console.log(req.user.id, req.body.date, req.body.detail, req.body.time);
+
+  const date = new Date(req.body.date);
+  const timeParts = req.body.time.split(":");
+  date.setHours(timeParts[0], timeParts[1]);
+
+  const timestamp = date.toISOString();
+  const queryText = `
+      WITH user_family AS (
+        SELECT family_id 
+        FROM user_family 
+        WHERE user_id = $1
+    ), new_event AS (
+      INSERT INTO event (date, detail, time, family_id)
+      SELECT $2, $3, $4, family_id
+      FROM user_family
+      RETURNING id
+    )
+    INSERT INTO user_event (user_id, event_id, attending)
+    SELECT $1, id, true
+    FROM new_event;
+      `;
+
+  pool
+    .query(queryText, [req.user.id, req.body.date, req.body.detail, timestamp])
+    .then((result) => {
+      res.sendStatus(201);
+    })
+    .catch((error) => {
+      console.log("error in event router POST", error);
+      res.sendStatus(500);
+    });
+});
+
 module.exports = router;
