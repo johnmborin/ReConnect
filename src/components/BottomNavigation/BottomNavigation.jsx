@@ -64,7 +64,7 @@ function LabelBottomNavigation() {
             </BottomNavigation>
             </>
              )}
-             {user.id && !user.is_parent && (
+             {user.id && user.access_level==="child" && (
           <>
             <BottomNavigation
                 showLabels
