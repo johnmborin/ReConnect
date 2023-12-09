@@ -5,7 +5,6 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import './AdminConsole.css';
-
 function AdminConsoleView() {
   const history = useHistory();
 
@@ -104,6 +103,7 @@ function AdminConsoleView() {
           </Grid>
         </Grid>
       </Box>
+    </div>
     </div>
   );
 }

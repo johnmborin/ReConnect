@@ -216,6 +216,7 @@ function RegisterForm() {
             </MenuItem>
             <MenuItem value="parent">Parent</MenuItem>
             <MenuItem value="child">Child</MenuItem>
+            <MenuItem value="admin">Admin</MenuItem>
           </Select>
         </label>
       </div>

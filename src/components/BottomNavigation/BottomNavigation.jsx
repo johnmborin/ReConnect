@@ -4,7 +4,6 @@ import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import NoteAltIcon from '@mui/icons-material/NoteAlt';
-import GroupsIcon from '@mui/icons-material/Groups';
 import BallotIcon from '@mui/icons-material/Ballot';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
