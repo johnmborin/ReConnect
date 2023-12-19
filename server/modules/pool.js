@@ -1,10 +1,3 @@
-/* the only line you likely need to change is
-
- database: 'prime_app',
-
- change `prime_app` to the name of your database, and you should be all set!
-*/
-
 const pg = require("pg");
 let pool;
 
@@ -19,6 +12,14 @@ if (process.env.DATABASE_URL) {
     ssl: {
       rejectUnauthorized: false,
     },
+  });
+} else if (process.env.user) {
+  pool = new pg.Pool({
+    host: "localhost",
+    port: 5432,
+    database: "reconnect", // 	💥 Change this to the name of your database!
+    user: process.env.user,
+    password: process.env.password,
   });
 }
 // When we're running this app on our own computer
