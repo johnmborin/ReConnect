@@ -13,15 +13,18 @@ function SurveyView() {
     dispatch({ type: "FETCH_QUESTION" });
   }, []);
 
-  const handleChange = (index, value, type) => {
+  const handleChange = (index, value, type, id) => {
     setSurvey(prev => {
       const newSurvey = [...prev];
       if (type === "multi" && newSurvey[index]) {
-        newSurvey[index] = newSurvey[index].includes(value)
-          ? newSurvey[index].replace(`|${value}`, "")
-          : `${newSurvey[index]}|${value}`;
+        newSurvey[index] = {
+          id: id,
+          response: newSurvey[index].response.includes(value)
+            ? newSurvey[index].response.replace(`|${value}`, "")
+            : `${newSurvey[index].response}|${value}`,
+        };
       } else {
-        newSurvey[index] = value;
+        newSurvey[index] = { id: id, response: value };
       }
       return newSurvey;
     });
@@ -42,7 +45,9 @@ function SurveyView() {
             {q.type === "short" && (
               <input
                 type="text"
-                onChange={e => handleChange(index, e.target.value)}
+                onChange={e =>
+                  handleChange(index, e.target.value, q.type, q.id)
+                }
               />
             )}
             {q.type === "single" &&
@@ -53,7 +58,9 @@ function SurveyView() {
                     id={`option${index}-${i}`}
                     name={`question${index}`}
                     value={option.detail}
-                    onChange={e => handleChange(index, e.target.value)}
+                    onChange={e =>
+                      handleChange(index, e.target.value, q.type, q.id)
+                    }
                   />
                   <label htmlFor={`option${index}-${i}`}>{option.detail}</label>
                 </div>
@@ -70,7 +77,8 @@ function SurveyView() {
                       handleChange(
                         index,
                         e.target.checked ? option.detail : null,
-                        q.type
+                        q.type,
+                        q.id
                       )
                     }
                   />

@@ -17,22 +17,55 @@ router.get("/", (req, res) => {
 
 router.post("/", (req, res) => {
   if (req.isAuthenticated()) {
-    let queryText = `
-    INSERT INTO "response" ("response", "user_id", "date", "question_id", "response")
-    VALUES ($1, $2, $3, $4, $5);
-`;
-    const queryParams = [
-      req.body.response,
-      req.user.id,
-      req.body.date,
-      req.body.question_id,
-      req.body.score,
-    ];
+    console.log(req.body);
+    const surveyResponses = req.body;
+    const userId = req.user.id;
+    const currentDate = new Date();
+
     pool
-      .query(queryText, queryParams)
-      .then(result => {
-        res.sendStatus(201);
+      .connect()
+      .then(client => {
+        return client
+          .query("BEGIN")
+          .then(() => {
+            const insertPromises = surveyResponses.map(response => {
+              if (response) {
+                let { id: question_id, response: userResponse } = response;
+                console.log(
+                  `Question ID: ${question_id}, User Response: ${userResponse}`
+                );
+
+                if (userResponse && userResponse.includes("|")) {
+                  const responses = userResponse.split("|");
+                  return Promise.all(
+                    responses.map(res => {
+                      return client.query(
+                        `INSERT INTO "response" ("user_id", "date", "question_id", "response") VALUES ($1, $2, $3, $4)`,
+                        [userId, currentDate, question_id, res.trim()]
+                      );
+                    })
+                  );
+                } else if (userResponse) {
+                  return client.query(
+                    `INSERT INTO "response" ("user_id", "date", "question_id", "response") VALUES ($1, $2, $3, $4)`,
+                    [userId, currentDate, question_id, userResponse]
+                  );
+                }
+              }
+            });
+
+            return Promise.all(insertPromises);
+          })
+          .then(client.query("COMMIT"))
+          .catch(err => {
+            console.error("Error during transaction", err.stack);
+            return client.query("ROLLBACK");
+          })
+          .finally(() => {
+            client.release();
+          });
       })
+      .then(() => res.sendStatus(201))
       .catch(error => {
         console.log(error);
         res.sendStatus(500);
