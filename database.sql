@@ -88,7 +88,6 @@ CREATE TABLE journal (
     user_id INT REFERENCES "user"(id),
     date DATE NOT NULL,
     detail TEXT
-
 );
 
 INSERT INTO prompt (detail) VALUES

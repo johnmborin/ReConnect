@@ -22,10 +22,10 @@ function RegisterForm() {
   const [showDialog, setShowDialog] = useState(false);
   const [familyMembers, setFamilyMembers] = useState([]);
 
-  const errors = useSelector((store) => store.errors);
+  const errors = useSelector(store => store.errors);
   const dispatch = useDispatch();
 
-  const handleChange = (event) => {
+  const handleChange = event => {
     setMemberDetail({
       ...memberDetail,
       [event.target.name]: event.target.value,
@@ -36,13 +36,11 @@ function RegisterForm() {
     setShowDialog(true);
   };
 
-  const addMemberToFamily = (e) => {
+  const addMemberToFamily = e => {
     e.preventDefault();
 
     const newFamilyMembers = [...familyMembers, memberDetail];
     setFamilyMembers(newFamilyMembers);
-
-    console.log("familyMembers", newFamilyMembers);
 
     handleConfirm();
   };
@@ -73,21 +71,30 @@ function RegisterForm() {
     <form
       className="formPanel"
       onSubmit={addMemberToFamily}
-      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-    >
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}>
       <h2>Register User</h2>
 
       {errors.registrationMessage && (
-        <h3 className="alert" accessLevel="alert">
+        <h3
+          className="alert"
+          accessLevel="alert">
           {errors.registrationMessage}
         </h3>
       )}
 
       {showDialog && (
-        <div className="dialog" style={{ position: "fixed", zIndex: 9999 }}>
+        <div
+          className="dialog"
+          style={{ position: "fixed", zIndex: 9999 }}>
           <div className="dialog-content">
             <h2>Register another family member?</h2>
-            <button style={{ marginRight: "10px" }} onClick={handleYes}>
+            <button
+              style={{ marginRight: "10px" }}
+              onClick={handleYes}>
               Yes
             </button>
             <button onClick={handleNo}>No</button>
@@ -227,9 +234,10 @@ function RegisterForm() {
             }}
             displayEmpty
             required
-            inputProps={{ "aria-label": "Without label", name: "accessLevel" }}
-          >
-            <MenuItem value="" disabled>
+            inputProps={{ "aria-label": "Without label", name: "accessLevel" }}>
+            <MenuItem
+              value=""
+              disabled>
               Select Role
             </MenuItem>
             <MenuItem value="parent">Parent</MenuItem>
@@ -246,8 +254,7 @@ function RegisterForm() {
             borderRadius: "40px",
             width: "150px",
           }}
-          type="submit"
-        >
+          type="submit">
           Register
         </ContainedButton>
       </div>

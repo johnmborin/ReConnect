@@ -3,9 +3,7 @@ const pool = require("../modules/pool");
 const router = express.Router();
 
 router.get("/", (req, res) => {
-
-  if (req.user.access_level === 'admin') {
-    //Get all journals
+  if (req.user.access_level === "admin") {
     queryText = `
     SELECT "journal".*, "user"."first_name" 
     FROM "journal" 
@@ -15,16 +13,14 @@ router.get("/", (req, res) => {
 
     pool
       .query(queryText)
-      .then((result) => {
+      .then(result => {
         res.send(result.rows);
       })
-      .catch((error) => {
+      .catch(error => {
         console.log("error in journal router GET", error);
         res.sendStatus(500);
       });
   } else {
-
-    //Get Journals by userId
     let queryText = `
     SELECT "journal".*, "user"."first_name" 
     FROM "journal" 
@@ -35,10 +31,10 @@ router.get("/", (req, res) => {
 
     pool
       .query(queryText, [req.user.id])
-      .then((result) => {
+      .then(result => {
         res.send(result.rows);
       })
-      .catch((error) => {
+      .catch(error => {
         console.log("error in journal router GET", error);
         res.sendStatus(500);
       });
@@ -52,8 +48,8 @@ router.post("/", (req, res) => {
     "INSERT INTO journal (prompt_id, user_id, date, detail) VALUES ($1, $2, $3, $4) RETURNING id;";
   pool
     .query(queryText, [prompt_id, user_id, date, detail])
-    .then((result) => res.send(result.rows[0]))
-    .catch((error) => {
+    .then(result => res.send(result.rows[0]))
+    .catch(error => {
       console.error("Error in POST /journal:", error);
       res.sendStatus(500);
     });
@@ -67,7 +63,7 @@ router.put("/:id", (req, res) => {
   pool
     .query(queryText, [detail, id])
     .then(() => res.sendStatus(200))
-    .catch((error) => {
+    .catch(error => {
       console.error("Error in PUT /journal:", error);
       res.sendStatus(500);
     });
@@ -80,7 +76,7 @@ router.delete("/:id", (req, res) => {
   pool
     .query(queryText, [id])
     .then(() => res.sendStatus(200))
-    .catch((error) => {
+    .catch(error => {
       console.error("Error in DELETE /journal:", error);
       res.sendStatus(500);
     });

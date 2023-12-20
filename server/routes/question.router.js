@@ -34,8 +34,6 @@ router.get("/", async (req, res) => {
 
     const questionsArray = Object.values(questions);
 
-    console.log(questionsArray);
-
     res.json(questionsArray);
   } catch (error) {
     console.log("error in question router GET", error);
@@ -119,10 +117,10 @@ router.put("/visibility/:id", (req, res) => {
 
   pool
     .query(queryText, [req.params.id])
-    .then((result) => {
+    .then(result => {
       res.sendStatus(200);
     })
-    .catch((error) => {
+    .catch(error => {
       console.log("error in question router PUT", error);
       res.sendStatus(500);
     });
@@ -133,10 +131,10 @@ router.put("/archive/:id", (req, res) => {
 
   pool
     .query(queryText, [req.params.id])
-    .then((result) => {
+    .then(result => {
       res.sendStatus(200);
     })
-    .catch((error) => {
+    .catch(error => {
       console.log("error in question router PUT", error);
       res.sendStatus(500);
     });

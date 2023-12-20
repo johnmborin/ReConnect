@@ -12,11 +12,10 @@ router.get("/", (req, res) => {
 
   pool
     .query(queryText)
-    .then((result) => {
-      console.log("result.rows", result.rows);
+    .then(result => {
       res.send(result.rows);
     })
-    .catch((err) => {
+    .catch(err => {
       console.log(err, "error in survey GET");
       res.sendStatus(500);
     });
