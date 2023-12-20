@@ -1,68 +1,29 @@
-import axios from 'axios';
-import { put, takeLatest, all, call, select } from 'redux-saga/effects';
-import dayjs from 'dayjs';
+import axios from "axios";
+import { put, takeLatest } from "redux-saga/effects";
 
 function* getSurveyList() {
   try {
-    const surveyQuestion = yield axios.get('/api/survey');
-    yield put({ type: 'SET_SURVEY', payload: surveyQuestion.data });
+    const surveyQuestion = yield axios.get("/api/survey");
+    yield put({ type: "SET_SURVEY", payload: surveyQuestion.data });
   } catch (error) {
-    console.log('ERROR in getSurveyList', error);
-    alert('Something went wrong!');
+    console.log("ERROR in getSurveyList", error);
+    alert("Something went wrong!");
   }
 }
 
-function* submitLikertForm(action) {
+function* postSurvey(action) {
   try {
-    const { likertFormData } = action.payload;
-    const userId = yield select(state => state.user.id);
-    const currentDate = dayjs().format();
-
-    yield axios.post('/api/likert', {
-      response: likertFormData,
-      user_id: userId,
-      date: currentDate,
-    });
+    yield axios.post("/api/survey", action.payload);
+    yield put({ type: "FETCH_SURVEY" });
   } catch (error) {
-    console.log('ERROR in submitLikertForm', error);
-    alert('Failed to submit likert form!');
-  }
-}
-
-function* submitFreeForm(action) {
-  try {
-    const { freeFormData } = action.payload;
-    const userId = yield select(state => state.user.id);
-    const currentDate = dayjs().format();
-
-    yield axios.post('/api/freeform', {
-      response: freeFormData,
-      user_id: userId,
-      date: currentDate,
-    });
-  } catch (error) {
-    console.log('ERROR in submitFreeForm', error);
-    alert('Failed to submit freeform!');
-  }
-}
-
-function* submitAllForms(action) {
-  try {
-    const { likertFormData, freeFormData } = action.payload;
-
-    yield all([
-      call(submitLikertForm, { payload: { likertFormData } }),
-      call(submitFreeForm, { payload: { freeFormData } }),
-    ]);
-  } catch (error) {
-    console.log('ERROR in submitAllForms', error);
-    alert('Failed to submit all forms!');
+    console.log("ERROR in postSurvey", error);
+    alert("Something went wrong!");
   }
 }
 
 function* surveySaga() {
-  yield takeLatest('FETCH_SURVEY', getSurveyList);
-  yield takeLatest('SUBMIT_ALL_FORMS', submitAllForms);
+  yield takeLatest("FETCH_SURVEY", getSurveyList);
+  yield takeLatest("POST_SURVEY", postSurvey);
 }
 
 export default surveySaga;

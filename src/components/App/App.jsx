@@ -22,7 +22,7 @@ import InfoPage from "../InfoPage/InfoPage";
 import LandingPage from "../LandingPage/LandingPage";
 import LoginPage from "../LoginPage/LoginPage";
 import RegisterPage from "../RegisterPage/RegisterPage";
-import Survey from "../Survey/Survey";
+import SurveyView from "../SurveyView/SurveyView";
 import ResourcesView from "../ResourcesView/ResourcesView";
 import CalendarView from "../CalendarView/CalendarView";
 import JournalView from "../JournalView/JournalView";
@@ -33,7 +33,7 @@ import "./App.css";
 function App() {
   const dispatch = useDispatch();
 
-  const user = useSelector((store) => store.user);
+  const user = useSelector(store => store.user);
 
   useEffect(() => {
     dispatch({ type: "FETCH_USER" });
@@ -44,14 +44,17 @@ function App() {
       <Nav />
       <Switch>
         {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-        <Redirect exact from="/" to="/home" />
+        <Redirect
+          exact
+          from="/"
+          to="/home"
+        />
 
         {/* Visiting localhost:3000/about will show the about page. */}
         <Route
           // shows AboutPage at all times (logged in or not)
           exact
-          path="/about"
-        >
+          path="/about">
           <AboutPage />
         </Route>
 
@@ -63,8 +66,7 @@ function App() {
         <ProtectedRoute
           // logged in shows UserPage else shows LoginPage
           exact
-          path="/user"
-        >
+          path="/user">
           {user.id ? (
             // If the user is already logged in,
             // redirect to the /user page
@@ -75,7 +77,9 @@ function App() {
           )}
         </ProtectedRoute>
 
-        <Route exact path="/login">
+        <Route
+          exact
+          path="/login">
           {user.id ? (
             // If the user is already logged in,
             // redirect to the /user page
@@ -86,7 +90,9 @@ function App() {
           )}
         </Route>
 
-        <Route exact path="/registration">
+        <Route
+          exact
+          path="/registration">
           {user.id ? (
             // If the user is already logged in,
             // redirect them to the /user page
@@ -97,8 +103,10 @@ function App() {
           )}
         </Route>
 
-        <Route exact path="/home">
-          {user.id && user.access_level === 'admin' ? (
+        <Route
+          exact
+          path="/home">
+          {user.id && user.access_level === "admin" ? (
             // If the user is already logged in,
             // redirect them to the /calendar page
             <Redirect to="/admin" />
@@ -111,15 +119,21 @@ function App() {
           )}
         </Route>
 
-        <ProtectedRoute exact path="/user">
+        <ProtectedRoute
+          exact
+          path="/user">
           <UserPage />
         </ProtectedRoute>
 
-        <ProtectedRoute exact path="/info">
+        <ProtectedRoute
+          exact
+          path="/info">
           <InfoPage />
         </ProtectedRoute>
 
-        <Route exact path="/login">
+        <Route
+          exact
+          path="/login">
           {user.id ? (
             // If the user is already logged in,
             // redirect to the /user page
@@ -133,20 +147,20 @@ function App() {
         <ProtectedRoute
           // logged in shows Survey page
           exact
-          path="/survey"
-        >
-          <Survey />
+          path="/survey">
+          <SurveyView />
         </ProtectedRoute>
-        <Route exact path="/journal">
+        <Route
+          exact
+          path="/journal">
           <JournalView />
         </Route>
 
         <ProtectedRoute
           // logged in shows CalendarView else shows LoginPage
           exact
-          path="/calendar"
-        >
-          {user.id && user.access_level === 'admin' ? (
+          path="/calendar">
+          {user.id && user.access_level === "admin" ? (
             // If the user is already logged in,
             // redirect them to the /calendar page
             <Redirect to="/admin" />
@@ -157,10 +171,11 @@ function App() {
             // Otherwise, show the LandingPage
             <LandingPage />
           )}
-
         </ProtectedRoute>
 
-        <Route exact path="/resources">
+        <Route
+          exact
+          path="/resources">
           <ResourcesView />
         </Route>
 
@@ -168,8 +183,7 @@ function App() {
           // logged in shows AdminConsoleView else shows LoginPage
           exact
           path="/admin"
-          authRedirect="/user"
-        >
+          authRedirect="/user">
           {user.access_level === "admin" ? (
             <AdminConsoleView />
           ) : (
@@ -177,7 +191,10 @@ function App() {
           )}
         </ProtectedRoute>
 
-        <ProtectedRoute exact path="/admin/search" authRedirect="/user">
+        <ProtectedRoute
+          exact
+          path="/admin/search"
+          authRedirect="/user">
           {user.access_level === "admin" ? (
             <AdminSearchView />
           ) : (
@@ -185,7 +202,10 @@ function App() {
           )}
         </ProtectedRoute>
 
-        <ProtectedRoute exact path="/admin/questions" authRedirect="/user">
+        <ProtectedRoute
+          exact
+          path="/admin/questions"
+          authRedirect="/user">
           {user.access_level === "admin" ? (
             <AdminQuestions />
           ) : (
@@ -193,7 +213,10 @@ function App() {
           )}
         </ProtectedRoute>
 
-        <ProtectedRoute exact path="/admin/prompts" authRedirect="/user">
+        <ProtectedRoute
+          exact
+          path="/admin/prompts"
+          authRedirect="/user">
           {user.access_level === "admin" ? (
             <AdminPrompts />
           ) : (
@@ -201,7 +224,10 @@ function App() {
           )}
         </ProtectedRoute>
 
-        <ProtectedRoute exact path="/admin/resources" authRedirect="/user">
+        <ProtectedRoute
+          exact
+          path="/admin/resources"
+          authRedirect="/user">
           {user.access_level === "admin" ? (
             <AdminResources />
           ) : (
