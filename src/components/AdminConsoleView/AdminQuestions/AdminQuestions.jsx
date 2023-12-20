@@ -1,11 +1,13 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./AdminQuestions.css";
+import { useHistory } from "react-router-dom";
 
 function AdminQuestions() {
   const question = useSelector((state) => state.question);
   const dispatch = useDispatch();
   const optionIdCounter = useRef(0);
+  const history = useHistory();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState({
@@ -83,32 +85,39 @@ function AdminQuestions() {
 
   return (
     <div className="container">
-      <p>Admin Questions</p>
-      <ul>
+      <h2 className="admin-survey-title">ADMIN SURVEY</h2>
+      <button className="admin-prompt-btn" onClick={() => openModal()}>Add question</button>
+      <button className="admin-prompt-btn" onClick={() => history.push("/admin")}>Back to Admin Home</button>
+      
+      <div className="prompts-layout">
+      <table className="prompts-list">
         {question
           .filter((question) => !question.archived)
           .map((question) => (
-            <li key={question.id}>
-              {question.detail} - {question.hidden ? "hidden" : "visible"}
-              <button onClick={() => openModal(question)}>Edit question</button>
+            <tr key={question.id}>
+              <td>{question.detail}</td>
+              <div className="table-btns">
+              <button className="question-btn" onClick={() => openModal(question)}>Edit</button>
               <button
+              className="question-btn"
                 onClick={() => {
                   toggleVisibility(question.id);
                 }}
               >
-                Toggle visibility
+                {question.hidden ? "Hide Question" : "Show Question"}
               </button>
               <button
+              className="question-btn"
                 onClick={() => {
                   archiveQuestion(question.id);
                 }}
               >
-                Archive
+                Delete
               </button>
-            </li>
+              </div>
+            </tr>
           ))}
-      </ul>
-      <button onClick={() => openModal()}>Add question</button>
+      </table>
 
       {isModalOpen && (
         <div className="dialog">
@@ -205,6 +214,7 @@ function AdminQuestions() {
           </div>
         </div>
       )}
+    </div>
     </div>
   );
 }
