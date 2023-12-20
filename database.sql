@@ -91,30 +91,6 @@ CREATE TABLE journal (
 
 );
 
--- INSERT INTO "user" (first_name, last_name, state, city, date_of_birth, password, username, access_level)
--- VALUES ('John', 'Doe', 'CA', 'San Francisco', '1990-01-01', 'password', 'jerry@gmail.com', 'admin');
-
-INSERT INTO family (id)
-VALUES (1);
-
-INSERT INTO user_family (user_id, family_id)
-VALUES (1, 1);
-
-INSERT INTO event (date, detail, family_id, time, type)
-VALUES ('2020-01-01', 'New Years', 1, '2020-01-01 00:00:00', 'holiday');
-
-INSERT INTO user_event (event_id, user_id, attending)
-VALUES (1, 1, true);
-
-INSERT INTO resource (access_level)
-VALUES ('parent');
-
-INSERT INTO response (user_id, date, question_id, response, score)
-VALUES (1, '2020-01-01', 1, 'response', 1);
-
-INSERT INTO journal (prompt_id, user_id, date, detail)
-VALUES (1, 1, '2020-01-01', 'detail');
-
 INSERT INTO prompt (detail) VALUES
 ('What do I want to do to maintain the relationship with my parents?'),
 ('What is it about my parents that makes me proud?'),
@@ -199,16 +175,6 @@ INSERT INTO question_options (question_id, detail) VALUES
 (8, 'Yes'),
 (8, 'No');
 
--- CREATE TABLE response (
---     id SERIAL PRIMARY KEY,
---     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
---     user_id INT REFERENCES "user"(id),
---     date DATE NOT NULL,
---     question_id INT REFERENCES question(id),
---     response TEXT
--- );
-
--- add dummy data to the response table for each question I inserted above
 INSERT INTO response (user_id, date, question_id, response)
 VALUES (1, '2020-01-01', 1, 'Strongly Disagree'),
 (1, '2020-01-01', 2, 'Strongly Disagree'),
