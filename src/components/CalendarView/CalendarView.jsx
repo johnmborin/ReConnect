@@ -139,6 +139,9 @@ function CalanderView() {
       payload: { eventId: editEventId, eventData: editableEvent },
     });
     setEditEventId(null);
+    setIsEditing(false);
+    document.getElementById("detail").value = "";
+    document.getElementById("time").value = "";
   };
 
   const handleInputChange = e => {
