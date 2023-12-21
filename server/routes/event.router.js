@@ -2,18 +2,30 @@ const express = require("express");
 const pool = require("../modules/pool");
 const router = express.Router();
 
-router.get("/:familyId", (req, res) => {
-  const familyId = req.params.familyId;
-  const queryText = `
-      SELECT user_event.*, event.* 
-      FROM user_event 
-      JOIN event ON user_event.event_id = event.id 
-      WHERE "event"."family_id" = $1
-      ORDER BY user_event.id ASC;
-    `;
+router.get("/", (req, res) => {
+  const userId = req.user.id;
+
+  const familyIdQuery = `
+    SELECT "family_id" 
+    FROM "user_family"
+    WHERE "user_id" = $1;
+  `;
 
   pool
-    .query(queryText, [familyId])
+    .query(familyIdQuery, [userId])
+    .then(result => {
+      const familyId = result.rows[0].family_id;
+
+      const eventQuery = `
+        SELECT user_event.*, event.* 
+        FROM user_event 
+        JOIN event ON user_event.event_id = event.id 
+        WHERE "event"."family_id" = $1
+        ORDER BY user_event.id ASC;
+      `;
+
+      return pool.query(eventQuery, [familyId]);
+    })
     .then(result => {
       res.send(result.rows);
     })
