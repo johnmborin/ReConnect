@@ -75,16 +75,35 @@ router.post("/", (req, res) => {
 });
 
 router.put("/:id", (req, res) => {
+  console.log("in event router PUT", req.body);
   const eventId = req.params.id;
-  const { date, detail, time } = req.body;
+  const { detail, date, time } = req.body;
+
+  const dateOnly = date.split("T")[0];
+
+  const [hours, minutes] = time.split(":");
+  const timeString = `${hours.padStart(2, "0")}:${minutes.padStart(2, "0")}:00`;
+
+  const dateTimeString = `${dateOnly}T${timeString}`;
+  console.log("dateTimeString:", dateTimeString);
+
+  let eventDateTime = new Date(dateTimeString);
+  console.log("eventDateTime:", eventDateTime);
+
+  eventDateTime.setMinutes(
+    eventDateTime.getMinutes() - eventDateTime.getTimezoneOffset()
+  );
+
+  const timestamp = eventDateTime.toISOString();
+
   const queryText = `
       UPDATE event 
-      SET date = $1, detail = $2, time = $3 
-      WHERE id = $4;
+      SET detail = $1, time = $2 
+      WHERE id = $3;
   `;
 
   pool
-    .query(queryText, [date, detail, time, eventId])
+    .query(queryText, [detail, timestamp, eventId])
     .then(() => res.sendStatus(200))
     .catch(error => {
       console.log("error in event router PUT", error);

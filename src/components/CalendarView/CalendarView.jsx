@@ -76,6 +76,8 @@ function CalanderView() {
     time: "",
   });
 
+  const [isEditing, setIsEditing] = useState(false);
+
   useEffect(() => {
     dispatch({ type: "FETCH_EVENT" });
   }, [dispatch]);
@@ -108,6 +110,15 @@ function CalanderView() {
       date: event.date,
       time: event.time,
     });
+    document.getElementById("detail").value = event.detail;
+    document.getElementById("time").value = dayjs(event.time).format("HH:mm");
+    setIsEditing(true);
+  };
+
+  const handleCancel = () => {
+    document.getElementById("detail").value = "";
+    document.getElementById("time").value = "";
+    setIsEditing(false);
   };
 
   const handleDelete = eventId => {
@@ -140,41 +151,6 @@ function CalanderView() {
   };
 
   const renderEvent = event => {
-    if (editEventId === event.id) {
-      return (
-        <div className="event-editing">
-          <input
-            type="text"
-            name="detail"
-            value={editableEvent.detail}
-            onChange={handleInputChange}
-            placeholder="Event Detail"
-          />
-          <input
-            type="date"
-            name="date"
-            value={formatDate(editableEvent.date)}
-            onChange={handleInputChange}
-          />
-          <input
-            type="time"
-            name="time"
-            value={editableEvent.time}
-            onChange={handleInputChange}
-          />
-          <button
-            className="btn btn-primary"
-            onClick={saveEdit}>
-            Save
-          </button>
-          <button
-            className="btn btn-secondary"
-            onClick={() => setEditEventId(null)}>
-            Cancel
-          </button>
-        </div>
-      );
-    }
     return (
       <div className="event-display">
         <span className="event-details">
@@ -182,7 +158,7 @@ function CalanderView() {
         </span>
         <div className="edit-delete-btn">
           <EditIcon
-            onClick={() => handleDelete(event)}
+            onClick={() => handleEdit(event)}
             sx={{ color: "black" }}
           />
           <DeleteIcon
@@ -236,41 +212,74 @@ function CalanderView() {
             fullWidth
             type="text"
             id="detail"
+            name="detail"
             label="Event Details"
             variant="outlined"
+            InputLabelProps={{ shrink: true }}
+            onChange={handleInputChange}
           />
           <div>
             <TextField
               type="time"
               id="time"
+              name="time"
               sx={{ paddingTop: "10px" }}
               variant="outlined"
+              onChange={handleInputChange}
             />
-            <Button
-              sx={{
-                height: "55px",
-                marginTop: "10px",
-                marginLeft: "10px",
-                backgroundColor: "#1399a3",
-                color: "white",
-              }}
-              variant="contained"
-              onClick={() => {
-                dispatch({
-                  type: "POST_EVENT",
-                  payload: {
-                    date: selectedDate.format("MM/DD/YYYY"),
-                    detail: document.getElementById("detail").value,
-                    time: document.getElementById("time").value,
-                  },
-                });
+            {isEditing ? (
+              <>
+                <Button
+                  sx={{
+                    height: "55px",
+                    marginTop: "10px",
+                    marginLeft: "10px",
+                    backgroundColor: "#1399a3",
+                    color: "white",
+                  }}
+                  variant="contained"
+                  onClick={saveEdit}>
+                  EDIT
+                </Button>
+                <Button
+                  sx={{
+                    height: "55px",
+                    marginTop: "10px",
+                    marginLeft: "10px",
+                    backgroundColor: "#1399a3",
+                    color: "white",
+                  }}
+                  variant="contained"
+                  onClick={handleCancel}>
+                  CANCEL
+                </Button>
+              </>
+            ) : (
+              <Button
+                sx={{
+                  height: "55px",
+                  marginTop: "10px",
+                  marginLeft: "10px",
+                  backgroundColor: "#1399a3",
+                  color: "white",
+                }}
+                variant="contained"
+                onClick={() => {
+                  dispatch({
+                    type: "POST_EVENT",
+                    payload: {
+                      date: selectedDate.format("MM/DD/YYYY"),
+                      detail: document.getElementById("detail").value,
+                      time: document.getElementById("time").value,
+                    },
+                  });
 
-                document.getElementById("detail").value = "";
-                document.getElementById("time").value = "";
-              }}>
-              {" "}
-              ADD{" "}
-            </Button>
+                  document.getElementById("detail").value = "";
+                  document.getElementById("time").value = "";
+                }}>
+                ADD
+              </Button>
+            )}
           </div>
         </div>
 
