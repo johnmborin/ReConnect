@@ -330,13 +330,6 @@ function CalanderView() {
               </div>
             ))}
           </DialogContent>
-          <DialogActions>
-            <Button
-              autoFocus
-              onClick={handleClose}>
-              Save changes
-            </Button>
-          </DialogActions>
         </BootstrapDialog>
       </LocalizationProvider>
     </div>
