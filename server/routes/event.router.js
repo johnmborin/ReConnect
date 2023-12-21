@@ -36,17 +36,16 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  const date = new Date(req.body.date);
-  const timeParts = req.body.time.split(":");
-  date.setUTCHours(timeParts[0], timeParts[1]);
+  const date = req.body.date;
+  const time = req.body.time;
 
-  const utcTimestamp = date.toISOString();
+  const timestamp = `${date}T${time}:00`;
 
   const queryText = `
-      WITH user_family AS (
-        SELECT family_id 
-        FROM user_family 
-        WHERE user_id = $1
+    WITH user_family AS (
+      SELECT family_id 
+      FROM user_family 
+      WHERE user_id = $1
     ), new_event AS (
       INSERT INTO event (date, detail, time, family_id)
       SELECT $2, $3, $4, family_id
@@ -56,15 +55,10 @@ router.post("/", (req, res) => {
     INSERT INTO user_event (user_id, event_id, attending)
     SELECT $1, id, true
     FROM new_event;
-      `;
+  `;
 
   pool
-    .query(queryText, [
-      req.user.id,
-      req.body.date,
-      req.body.detail,
-      utcTimestamp,
-    ])
+    .query(queryText, [req.user.id, timestamp, req.body.detail, timestamp])
     .then(result => {
       res.sendStatus(201);
     })
@@ -75,26 +69,17 @@ router.post("/", (req, res) => {
 });
 
 router.put("/:id", (req, res) => {
-  console.log("in event router PUT", req.body);
   const eventId = req.params.id;
   const { detail, date, time } = req.body;
 
-  const dateOnly = date.split("T")[0];
+  const parsedDate = new Date(date);
+  const year = parsedDate.getUTCFullYear();
+  const month = parsedDate.getUTCMonth() + 1;
+  const day = parsedDate.getUTCDate();
 
-  const [hours, minutes] = time.split(":");
-  const timeString = `${hours.padStart(2, "0")}:${minutes.padStart(2, "0")}:00`;
-
-  const dateTimeString = `${dateOnly}T${timeString}`;
-  console.log("dateTimeString:", dateTimeString);
-
-  let eventDateTime = new Date(dateTimeString);
-  console.log("eventDateTime:", eventDateTime);
-
-  eventDateTime.setMinutes(
-    eventDateTime.getMinutes() - eventDateTime.getTimezoneOffset()
-  );
-
-  const timestamp = eventDateTime.toISOString();
+  const timestamp = `${year}-${month < 10 ? "0" + month : month}-${
+    day < 10 ? "0" + day : day
+  }T${time}:00`;
 
   const queryText = `
       UPDATE event 
