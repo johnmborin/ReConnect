@@ -92,13 +92,14 @@ router.put("/:id", (req, res) => {
     });
 });
 
-// DELETE route for removing an event
 router.delete("/:id", (req, res) => {
   const eventId = req.params.id;
-  const queryText = "DELETE FROM event WHERE id = $1;";
+  const queryText1 = "DELETE FROM user_event WHERE event_id = $1;";
+  const queryText2 = "DELETE FROM event WHERE id = $1;";
 
   pool
-    .query(queryText, [eventId])
+    .query(queryText1, [eventId])
+    .then(() => pool.query(queryText2, [eventId]))
     .then(() => res.sendStatus(204))
     .catch(error => {
       console.log("error in event router DELETE", error);
