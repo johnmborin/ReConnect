@@ -134,6 +134,9 @@ function CalanderView() {
   };
 
   const saveEdit = () => {
+    const localTime = document.getElementById("time").value;
+    const utcTime = dayjs(localTime, "HH:mm").utc().format("HH:mm");
+
     dispatch({
       type: "EDIT_EVENT",
       payload: {
@@ -141,6 +144,7 @@ function CalanderView() {
         eventData: {
           ...editableEvent,
           date: dayjs(editableEvent.date).format("MM/DD/YYYY"),
+          time: utcTime,
           timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
         },
       },
