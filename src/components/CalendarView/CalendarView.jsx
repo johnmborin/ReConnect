@@ -282,12 +282,17 @@ function CalanderView() {
                 }}
                 variant="contained"
                 onClick={() => {
+                  const localTime = document.getElementById("time").value;
+                  const utcTime = dayjs(localTime, "HH:mm")
+                    .utc()
+                    .format("HH:mm");
+
                   dispatch({
                     type: "POST_EVENT",
                     payload: {
                       date: dayjs.utc(selectedDate).format("MM/DD/YYYY"),
                       detail: document.getElementById("detail").value,
-                      time: document.getElementById("time").value,
+                      time: utcTime,
                       timezone:
                         Intl.DateTimeFormat().resolvedOptions().timeZone,
                     },
