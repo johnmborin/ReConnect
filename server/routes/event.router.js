@@ -1,6 +1,12 @@
 const express = require("express");
 const pool = require("../modules/pool");
 const router = express.Router();
+const dayjs = require("dayjs");
+const utc = require("dayjs/plugin/utc");
+const timezone = require("dayjs/plugin/timezone");
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 router.get("/", (req, res) => {
   const userId = req.user.id;
@@ -36,11 +42,9 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  console.log("event POST", req.body);
-  const date = req.body.date;
-  const time = req.body.time;
+  const { date, time, timezone } = req.body;
 
-  const timestamp = `${date}T${time}:00`;
+  const timestamp = dayjs(`${date} ${time}`, "MM/DD/YYYY HH:mm").format();
 
   const queryText = `
     WITH user_family AS (
@@ -70,11 +74,17 @@ router.post("/", (req, res) => {
 });
 
 router.put("/:id", (req, res) => {
-  console.log("event PUT", req.body);
   const eventId = req.params.id;
   const { detail, date, time } = req.body;
 
-  const timestamp = `${date}T${time}:00`;
+  const parsedDate = new Date(date);
+  const year = parsedDate.getUTCFullYear();
+  const month = parsedDate.getUTCMonth() + 1;
+  const day = parsedDate.getUTCDate();
+
+  const timestamp = `${year}-${month < 10 ? "0" + month : month}-${
+    day < 10 ? "0" + day : day
+  }T${time}:00`;
 
   const queryText = `
       UPDATE event 

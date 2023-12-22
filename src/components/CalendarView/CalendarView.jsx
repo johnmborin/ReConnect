@@ -141,6 +141,7 @@ function CalanderView() {
         eventData: {
           ...editableEvent,
           date: dayjs(editableEvent.date).format("MM/DD/YYYY"),
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
         },
       },
     });
@@ -156,7 +157,7 @@ function CalanderView() {
   };
 
   const formatTime = timeString => {
-    return dayjs(timeString).utc().format("h:mm A");
+    return dayjs(timeString).format("h:mm A");
   };
 
   const renderEvent = event => {
@@ -280,6 +281,8 @@ function CalanderView() {
                       date: selectedDate.format("MM/DD/YYYY"),
                       detail: document.getElementById("detail").value,
                       time: document.getElementById("time").value,
+                      timezone:
+                        Intl.DateTimeFormat().resolvedOptions().timeZone,
                     },
                   });
 
