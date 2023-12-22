@@ -136,7 +136,13 @@ function CalanderView() {
   const saveEdit = () => {
     dispatch({
       type: "EDIT_EVENT",
-      payload: { eventId: editEventId, eventData: editableEvent },
+      payload: {
+        eventId: editEventId,
+        eventData: {
+          ...editableEvent,
+          date: dayjs(editableEvent.date).format("MM/DD/YYYY"),
+        },
+      },
     });
     setEditEventId(null);
     setIsEditing(false);

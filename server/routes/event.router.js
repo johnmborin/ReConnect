@@ -36,6 +36,7 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
+  console.log("event POST", req.body);
   const date = req.body.date;
   const time = req.body.time;
 
@@ -69,17 +70,11 @@ router.post("/", (req, res) => {
 });
 
 router.put("/:id", (req, res) => {
+  console.log("event PUT", req.body);
   const eventId = req.params.id;
   const { detail, date, time } = req.body;
 
-  const parsedDate = new Date(date);
-  const year = parsedDate.getUTCFullYear();
-  const month = parsedDate.getUTCMonth() + 1;
-  const day = parsedDate.getUTCDate();
-
-  const timestamp = `${year}-${month < 10 ? "0" + month : month}-${
-    day < 10 ? "0" + day : day
-  }T${time}:00`;
+  const timestamp = `${date}T${time}:00`;
 
   const queryText = `
       UPDATE event 
