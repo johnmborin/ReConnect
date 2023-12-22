@@ -92,9 +92,9 @@ function CalanderView() {
   }, [selectedDate, events, families]);
 
   const handleDateChange = newValue => {
-    setSelectedDate(newValue);
+    setSelectedDate(dayjs(newValue).utc());
     const eventsForDay = events.filter(event =>
-      dayjs(event.date).isSame(newValue, "day")
+      dayjs.utc(event.date).isSame(dayjs(newValue).utc(), "day")
     );
     setSelectedEvents(eventsForDay);
   };
@@ -153,7 +153,14 @@ function CalanderView() {
 
   const handleInputChange = e => {
     const { name, value } = e.target;
-    setEditableEvent(prev => ({ ...prev, [name]: value }));
+    if (name === "date") {
+      setEditableEvent(prev => ({
+        ...prev,
+        [name]: dayjs.utc(value).format(),
+      }));
+    } else {
+      setEditableEvent(prev => ({ ...prev, [name]: value }));
+    }
   };
 
   const formatTime = timeString => {
@@ -278,7 +285,7 @@ function CalanderView() {
                   dispatch({
                     type: "POST_EVENT",
                     payload: {
-                      date: selectedDate.format("MM/DD/YYYY"),
+                      date: dayjs.utc(selectedDate).format("MM/DD/YYYY"),
                       detail: document.getElementById("detail").value,
                       time: document.getElementById("time").value,
                       timezone:
