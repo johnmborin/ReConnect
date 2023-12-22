@@ -156,7 +156,7 @@ function CalanderView() {
   };
 
   const formatTime = timeString => {
-    return dayjs(timeString).format("h:mm A");
+    return dayjs(timeString).utc().format("h:mm A");
   };
 
   const renderEvent = event => {
