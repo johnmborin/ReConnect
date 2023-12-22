@@ -163,8 +163,8 @@ function CalanderView() {
     }
   };
 
-  const formatTime = timeString => {
-    return dayjs.utc(timeString).local().format("h:mm A");
+  const formatTime = (timeString, userTimezone) => {
+    return dayjs.utc(timeString).tz(userTimezone).format("h:mm A");
   };
 
   const renderEvent = event => {
