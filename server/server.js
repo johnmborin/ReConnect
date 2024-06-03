@@ -44,7 +44,7 @@ app.use("/api/journal", journalRouter);
 app.use(express.static("build"));
 
 // App Set //
-const PORT = process.env.PORT || 5002;
+const PORT = process.env.PORT || 5005;
 
 /** Listen * */
 app.listen(PORT, () => {

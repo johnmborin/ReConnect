@@ -1,4 +1,5 @@
 import React from 'react';
+import { Col } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import './ResourcesView.css'
@@ -17,6 +18,15 @@ function ResourcesView() {
             {
                 resources.map(resource => (
                     <div>
+                        <Col sm={6} md={4}>
+                            <div className="proj-imgbx">
+                                
+                                <div className="proj-txtx">
+                                    <h4>{resource.description}</h4>
+                                    <span>{resource.url}</span>
+                                </div>
+                            </div>
+                        </Col>
                         <a className='link' href={resource.url} target="_blank">{resource.description}</a>
                         <hr className='line-under-resources'></hr>
                     </div>
