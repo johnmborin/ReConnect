@@ -20,7 +20,7 @@ function ResourcesView() {
                     <div>
                         <Col sm={6} md={4}>
                             <div className="proj-imgbx">
-                                
+                                <img src='#' />
                                 <div className="proj-txtx">
                                     <h4>{resource.description}</h4>
                                     <span>{resource.url}</span>
