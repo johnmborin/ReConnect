@@ -3,7 +3,7 @@ import { Col } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import './ResourcesView.css'
-import Test from './test.jpeg';
+
 
 function ResourcesView() {
     const dispatch = useDispatch();
