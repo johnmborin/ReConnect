@@ -3,6 +3,7 @@ import { Col } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import './ResourcesView.css'
+import Test from './test.jpeg';
 
 function ResourcesView() {
     const dispatch = useDispatch();
@@ -11,24 +12,25 @@ function ResourcesView() {
     useEffect(() => {
         dispatch({ type: 'FETCH_RESOURCE' })
     }, []);
-
+    
     return (
         <div className='rescources-container'>
             <h2>RESOURCES</h2>
             {
                 resources.map(resource => (
+                
                     <div>
-                        <Col sm={6} md={4}>
-                            <div className="proj-imgbx">
-                                <img src='#' />
-                                <div className="proj-txtx">
-                                    <h4>{resource.description}</h4>
-                                    <span>{resource.url}</span>
+                        <Col sm={6} md={4} className="resource-item">
+                            <a href={resource.url} target="_blank" rel="noopener noreferrer">
+                                <div className="resource-imgbx">
+                                    <img src={resource.imageurl} alt="Resource Image" />
+                                    <div className="resource-txtx">
+                                        <h4>{resource.description}</h4>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </Col>
-                        <a className='link' href={resource.url} target="_blank">{resource.description}</a>
-                        <hr className='line-under-resources'></hr>
+                        
                     </div>
                 ))
             }

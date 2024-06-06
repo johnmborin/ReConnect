@@ -21,14 +21,16 @@ router.get("/", (req, res) => {
 
 router.post("/", (req, res) => {
   const newResource = req.body;
-  const queryText = `INSERT INTO "resource" ("description", "url", "access_level")
-    VALUES ($1, $2, $3);`;
+  
+  const queryText = `INSERT INTO "resource" ("description", "url", "access_level", "imageurl")
+    VALUES ($1, $2, $3, $4);`;
 
   pool
     .query(queryText, [
       newResource.description,
       newResource.url,
       newResource.access_level,
+      newResource.imageurl
     ])
     .then((result) => {
       res.sendStatus(201);
@@ -41,13 +43,15 @@ router.post("/", (req, res) => {
 
 router.put("/:id", (req, res) => {
   const resource = req.body;
-  const queryText = `UPDATE "resource" SET "description" = $1, "url" = $2, "access_level" = $3 WHERE "id" = $4;`;
+  
+  const queryText = `UPDATE "resource" SET "description" = $1, "url" = $2,  "access_level" = $3, "imageurl" = $4 WHERE "id" = $5;`;
 
   pool
     .query(queryText, [
       resource.description,
       resource.url,
       resource.access_level,
+      resource.imageurl,
       req.params.id,
     ])
     .then((result) => {
