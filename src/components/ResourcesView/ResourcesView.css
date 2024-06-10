@@ -3,7 +3,7 @@
     margin-top: 50px;
     margin-left: 20px;
     margin-right: 20px;
-    padding-bottom: 40px;
+    padding-bottom: 100px;
 }
 
 .line-under-resources{
@@ -21,6 +21,13 @@
 }
 
 /* Container styles for the grid layout */
+.resources-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust the minmax value to control item size */
+    gap: 20px; /* Space between items */
+    justify-items: center; /* Center items horizontally */
+   
+}
 .resource-item {
     position: relative;
     overflow: hidden;
@@ -49,7 +56,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: rgba(0, 0, 0, 0.7);
+    background: #1399a3;
     color: #fff;
     padding: 10px;
     text-align: center;
@@ -58,7 +65,7 @@
 }
 
 .resource-txtx h4 {
-    margin: 0;
+    margin: 0 0 10px 0;
     font-size: 1.2em;
 }
 

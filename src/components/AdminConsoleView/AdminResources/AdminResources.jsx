@@ -33,7 +33,6 @@ function AdminResources() {
 
   function handleSave(e) {
     e.preventDefault();
-    
     if (currentResource.id) {
       dispatch({ type: "UPDATE_RESOURCE", payload: currentResource });
     } else {
@@ -54,7 +53,7 @@ function AdminResources() {
       <button className="admin-resources-btn" onClick={() => history.push("/admin")}>Back to Admin Home</button>
       <button className="admin-resources-btn" onClick={() => openModal()}>Add Resource</button>
 
-      <div className="resources-layout">
+      <div className="resources-admin-layout">
         <table className="resources-list">
           {resource.map((resource) => (
 
