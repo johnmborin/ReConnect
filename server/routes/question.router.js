@@ -7,7 +7,8 @@ router.get("/", async (req, res) => {
     const queryText = `
       SELECT q.id, q.detail, q.type, q.hidden, q.archived, qo.id as option_id, qo.detail as option_detail
       FROM question q
-      LEFT JOIN question_options qo ON q.id = qo.question_id;
+      LEFT JOIN question_options qo ON q.id = qo.question_id
+      WHERE q.archived = false;
     `;
     const result = await pool.query(queryText);
     const rows = result.rows;
